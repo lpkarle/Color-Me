@@ -29,6 +29,7 @@ public class EnemyAi : MonoBehaviour
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
         walkType = WalkType.Patroll;
     }
+
     public void WalkToNextDestination()
     {
         currentState = SlimeAnimationState.Walk;
@@ -36,16 +37,16 @@ public class EnemyAi : MonoBehaviour
         agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
         SetFace(faces.WalkFace);
     }
+
     public void CancelGoNextDestination() =>CancelInvoke(nameof(WalkToNextDestination));
 
     void SetFace(Texture tex)
     {
         faceMaterial.SetTexture("_MainTex", tex);
     }
+
     void Update()
     {
-        
-
         switch (currentState)
         {
             case SlimeAnimationState.Idle:
@@ -75,7 +76,7 @@ public class EnemyAi : MonoBehaviour
                         //facing to camera
                         transform.rotation = Quaternion.identity;
 
-                        currentState = SlimeAnimationState.Idle;
+                        //currentState = SlimeAnimationState.Idle;
                     }
                        
                 }
@@ -84,7 +85,7 @@ public class EnemyAi : MonoBehaviour
                 {
                     if (waypoints[0] == null) return;
                    
-                     agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+                    agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
 
                     // agent reaches the destination
                     if (agent.remainingDistance < agent.stoppingDistance)
@@ -92,7 +93,7 @@ public class EnemyAi : MonoBehaviour
                         currentState = SlimeAnimationState.Idle;
 
                         //wait 2s before go to next destionation
-                        Invoke(nameof(WalkToNextDestination), 2f);
+                        Invoke(nameof(WalkToNextDestination), .5f);
                     }
 
                 }
