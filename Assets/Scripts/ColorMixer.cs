@@ -8,7 +8,7 @@ public class ColorMixer : MonoBehaviour
     private GameObject[] colorObjects;
 
     [SerializeField]
-    private GameObject resultObject;
+    private GameObject[] objectsToColor;
 
     private Renderer[] colorObjectsRenderer;
 
@@ -22,8 +22,11 @@ public class ColorMixer : MonoBehaviour
         currentColor = new Color(0.0f, 0.0f, 0.0f);
         newMaterial.color = currentColor;
 
-        Renderer renderer = resultObject.GetComponent<Renderer>();
-        renderer.material = newMaterial;
+        foreach (var objToColor in objectsToColor)
+        {   
+            Renderer renderer = objToColor.GetComponent<Renderer>();
+            renderer.material = newMaterial;
+        }
     }
 
     // Update is called once per frame
