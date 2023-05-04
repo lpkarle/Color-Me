@@ -1,46 +1,117 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ColorMeGameManager : MonoBehaviour
 {
-    public GameObject currentSlime;
+    public static ColorMeGameManager instance;
 
-    //private Vector3 slimeInitSpawnPosition = new Vector3(1.3f, 1.3f, -4.5f);
-    //private Quaternion slimeInitSpawnRotation = Quaternion.Euler(0.0f, -90.0f, 0.0f);
+    public GameState state;
 
-    // Start is called before the first frame update
+    public int timer;
+    public Difficulty difficulty;
+    public String playerName;
+    public int playerScore;
+
+    public static event Action<GameState> onGameStateChanged;
+    // maby onBeforeGameStateChanged and onAfterGameStateChanged
+    
+    void Awake() 
+    {
+        instance = this;
+    }
+
     void Start()
     {
-
-        // Erzeuge eine Instanz des Slime-Prefabs
-        //GameObject newSlime = Instantiate(slimePrefabs[0], Vector3.zero, Quaternion.identity);
-
-        // Setze die Position des Slimes
-        //newSlime.transform.position = slimeInitSpawnPosition;
-        //newSlime.transform.rotation = slimeInitSpawnRotation;
-
-
-        ChangeStateTo(SlimeAnimationState.Walk);
+        UpdateGameState(GameState.MENU_WELCOME);
     }
-
-    void Idle()
+    
+    public void UpdateGameState(GameState newState)
     {
-        currentSlime.GetComponent<EnemyAi>().CancelGoNextDestination();
-        ChangeStateTo(SlimeAnimationState.Idle);
+        // if (state == newState) return;
+        // onBeforeStateChanged?.Invoke(newState);
+
+        state = newState;
+
+        switch (newState)
+        {
+            case GameState.MENU_WELCOME:
+                HandleWelcomeMenu();
+                break;
+            case GameState.MENU_ONBOARDING:
+                HandleOnboardingMenu();
+                break;
+            case GameState.GAME_INIT:
+                HandleGameInit();
+                break;
+            case GameState.GAME_PLAY:
+                break;
+            case GameState.GAME_END:
+                break;
+            case GameState.MENU_PAUSE:
+                HandlePauseMenu();
+                break;    
+            case GameState.MENU_RESULT:
+                HandleResultMenu();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
+        }
+
+        // onAfterStateChanged?.Invoke(newState);
+
+        onGameStateChanged?.Invoke(newState);
+
+        Debug.Log($"New state: {newState}.");
     }
 
-    public void ChangeStateTo(SlimeAnimationState state)
+    private void HandleWelcomeMenu()
     {
-        /* if (currentSlime == null) 
-            return;
-
-        if (state == currentSlime.GetComponent<EnemyAi>().currentState) 
-            return; */
-
-        Debug.Log("CHANGE STATE: " + state);
-
-        currentSlime.GetComponent<EnemyAi>().currentState = state ;
+        Debug.Log("Handle Welcome Menu");
     }
+
+    private void HandleOnboardingMenu()
+    {
+        Debug.Log("Handle Onboarding Menu");
+    }
+
+    private void HandleGameInit()
+    {
+        Debug.Log("Handle Game Initialization");
+
+        ColorMeUnitManager.Instance.InitGame();
+    }
+
+    private void HandlePauseMenu()
+    {
+        Debug.Log("Handle Pause Menu");
+    }
+
+    private void HandleResultMenu()
+    {
+        Debug.Log("Handle Result Menu");
+    }
+
+
+}
+
+public enum GameState
+{
+    MENU_WELCOME,
+    MENU_ONBOARDING,
+
+    GAME_INIT,
+    GAME_PLAY,
+    GAME_END,
+    
+    MENU_PAUSE,
+    MENU_RESULT
+}
+
+public enum Difficulty
+{
+    EASY,
+    MEDIUM,
+    HARD
 }
