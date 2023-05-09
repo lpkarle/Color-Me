@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ColorMeMenuManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _panelWelcome, _panelPause, _panelResult;
+    private GameObject _panelWelcome, _panelSpeechBubble, _panelPause, _panelResult;
 
     [SerializeField]
     private Button _btnStart;

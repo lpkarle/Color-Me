@@ -9,6 +9,9 @@ public class ColorMeUnitManager : MonoBehaviour
     [SerializeField]
     private GameObject[] slimeGameObjects;
 
+    [SerializeField]
+    private Vector3 spawnPosition = new Vector3(2.5f, 2.175f, -2);
+
     private void Awake() 
     {
         Instance = this;
@@ -30,6 +33,7 @@ public class ColorMeUnitManager : MonoBehaviour
     public void InitGame()
     {
         var slimeInstance = Instantiate(this.slimeGameObjects[0]);
+        slimeInstance.transform.position = this.spawnPosition;
         slimeInstance.SetActive(true);
         ColorMeGameManager.instance.UpdateGameState(GameState.MENU_PAUSE);
     }
