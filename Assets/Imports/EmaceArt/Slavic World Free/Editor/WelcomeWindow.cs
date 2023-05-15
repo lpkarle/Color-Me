@@ -20,10 +20,10 @@ public class WelcomeWindow : EditorWindow
     [UnityEditor.Callbacks.DidReloadScripts]
     private static void OpenWindowOnUnityStart()
     {
-        if (EditorApplication.isPlayingOrWillChangePlaymode)
+        /* if (EditorApplication.isPlayingOrWillChangePlaymode)
             return;
 
-        OpenWindow();
+        OpenWindow(); */
     }
 
     [MenuItem("Tools/EmaceArt/Welcome Window")]

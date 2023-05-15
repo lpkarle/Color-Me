@@ -16,12 +16,12 @@ public class ColorMixer : MonoBehaviour
     private Material newMaterial;
     private Color currentColor;
 
-    [SerializeField] private ActionBasedController actionBasedController;
+    /* [SerializeField] private ActionBasedController actionBasedController;*/
 
-    [SerializeField] private GameObject slime;
+    [SerializeField] private GameObject slime; 
 
 
-    private void OnEnable()
+    /* private void OnEnable()
     {
         actionBasedController.selectAction.action.performed += TriggerPressed;
     }
@@ -35,7 +35,7 @@ public class ColorMixer : MonoBehaviour
     {
         slime.SetActive(true);
         Debug.Log("Select button pressed!");
-    }
+    } */
 
     
     
@@ -57,7 +57,7 @@ public class ColorMixer : MonoBehaviour
     void Update()
     {
 
-        // Erstelle einen Ray, der von der Position des Controllers in dessen Vorwärtsrichtung verläuft
+        /* // Erstelle einen Ray, der von der Position des Controllers in dessen Vorwärtsrichtung verläuft
         Ray ray = new Ray(actionBasedController.transform.position, actionBasedController.transform.forward);
         // Definiere eine Variable, in der später das getroffene Objekt gespeichert wird
         GameObject hitObject = null;
@@ -68,7 +68,7 @@ public class ColorMixer : MonoBehaviour
         // Prüfe, ob das getroffene Objekt das Tag "Color" hat
         if (hitObject != null && hitObject.CompareTag("Color")) {
             // Hier kannst du Code ausführen, der ausgeführt werden soll, wenn das Objekt mit dem Tag "Color" getroffen wurde
-        }
+        } */
 
 
 
@@ -111,5 +111,10 @@ public class ColorMixer : MonoBehaviour
 
         newMaterial.color = currentColor;
 
+    }
+
+    public void ShootColor()
+    {
+        slime.SetActive(true);
     }
 }

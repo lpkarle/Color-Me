@@ -39,13 +39,15 @@ public class ColorMeMenuManager : MonoBehaviour
 
     private void gameManagerOnGameStateChanged(GameState state)
     {
+        _panelWelcome.transform.position = _locationWelcome.position;
+        _panelWelcome.transform.rotation = _locationWelcome.rotation;
         _panelWelcome.SetActive(state == GameState.MENU_WELCOME);
 
         _btnStart.interactable = state == GameState.MENU_WELCOME;
 
-        _panelGameTimer.transform.position = _locationGameTimer.position;
-        _panelGameTimer.transform.rotation = _locationGameTimer.rotation;
-        _panelGameTimer.SetActive(state == GameState.MENU_WELCOME);
+//        _panelGameTimer.transform.position = _locationGameTimer.position;
+//        _panelGameTimer.transform.rotation = _locationGameTimer.rotation;
+  //      _panelGameTimer.SetActive(state == GameState.MENU_WELCOME);
     }
 
     public void BtnStartPressed()
