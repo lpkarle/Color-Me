@@ -10,7 +10,7 @@ public class ColorMeGameManager : MonoBehaviour
     public GameState state;
 
     public int timer;
-    public Difficulty difficulty;
+    public Difficulty difficulty = Difficulty.EASY;
     public String playerName;
     public int playerScore;
 

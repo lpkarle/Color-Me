@@ -15,33 +15,25 @@ public class ColorMixer : MonoBehaviour
 
     private Material newMaterial;
     private Color currentColor;
+    private float colorStep;
+    private float colorMaximumValue = 1.0f;
 
-    /* [SerializeField] private ActionBasedController actionBasedController;*/
-
-    [SerializeField] private GameObject slime; 
-
-
-    /* private void OnEnable()
-    {
-        actionBasedController.selectAction.action.performed += TriggerPressed;
-    }
-
-    private void OnDisable()
-    {
-        actionBasedController.selectAction.action.performed -= TriggerPressed;
-    }
-
-    private void TriggerPressed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        slime.SetActive(true);
-        Debug.Log("Select button pressed!");
-    } */
-
-    
-    
-    // Start is called before the first frame update
     void Start()
     {
+        switch (ColorMeGameManager.instance.difficulty)
+        {
+            case Difficulty.EASY:
+                colorStep = 0.5f;
+                break;
+            case Difficulty.MEDIUM:
+                colorStep = 0.25f;
+                break;
+            case Difficulty.HARD:
+                colorStep = 0.1f;
+                break;
+        }
+
+        // Set all objects to color to black => inital state
         newMaterial = new Material(Shader.Find("Standard"));
         currentColor = new Color(0.0f, 0.0f, 0.0f);
         newMaterial.color = currentColor;
@@ -56,65 +48,57 @@ public class ColorMixer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        /* // Erstelle einen Ray, der von der Position des Controllers in dessen Vorwärtsrichtung verläuft
-        Ray ray = new Ray(actionBasedController.transform.position, actionBasedController.transform.forward);
-        // Definiere eine Variable, in der später das getroffene Objekt gespeichert wird
-        GameObject hitObject = null;
-        // Prüfe, ob der Ray ein Objekt trifft
-        if (Physics.Raycast(ray, out RaycastHit hit)) {
-            hitObject = hit.collider.gameObject;
-        }
-        // Prüfe, ob das getroffene Objekt das Tag "Color" hat
-        if (hitObject != null && hitObject.CompareTag("Color")) {
-            // Hier kannst du Code ausführen, der ausgeführt werden soll, wenn das Objekt mit dem Tag "Color" getroffen wurde
-        } */
-
-
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Debug.Log("RED");
-
-            if (currentColor.r < 1.0f)
-                currentColor.r += 0.1f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Debug.Log("GREEN");
-
-            if (currentColor.g < 1.0f)           
-                currentColor.g += 0.1f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        { 
-            Debug.Log("BLUE");
-
-            if (currentColor.b < 1.0f)
-                currentColor.b += 0.1f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Debug.Log("WhITE");
-            if (currentColor.r > 0.1f)
-                currentColor.r -= 0.1f;
-
-            if (currentColor.g > 0.1f)         
-                currentColor.g -= 0.1f;
-                        
-            if (currentColor.b > 0.1f)
-                currentColor.b -= 0.1f;
-        }
-
-        newMaterial.color = currentColor;
-
     }
 
     public void ShootColor()
     {
-        slime.SetActive(true);
+    }
+
+    public void PickColor()
+    {
+        RaycastHit hit;
+        //bool isHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit);
+        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Palette_Color_1"))
+            {
+                Debug.Log("COLOR 1");
+
+                if (currentColor.b < colorMaximumValue)
+                    currentColor.b += colorStep;
+            }
+
+            if (hit.collider.CompareTag("Palette_Color_2"))
+            {
+                Debug.Log("COLOR 2");
+
+                if (currentColor.g < colorMaximumValue)
+                    currentColor.g += colorStep;
+            }
+
+            if (hit.collider.CompareTag("Palette_Color_3"))
+            {
+                Debug.Log("COLOR 3");
+                
+                if (currentColor.r < colorMaximumValue)
+                    currentColor.r += colorStep;
+            }
+
+            if (hit.collider.CompareTag("Palette_Color_Reset"))
+            {
+                Debug.Log("COLOR Reset");
+
+                if (currentColor.r >= colorStep)
+                    currentColor.r -= colorStep;
+
+                if (currentColor.g >= colorStep)         
+                    currentColor.g -= colorStep;
+                            
+                if (currentColor.b >= colorStep)
+                    currentColor.b -= colorStep;
+            }
+        }
+
+        newMaterial.color = currentColor;
     }
 }

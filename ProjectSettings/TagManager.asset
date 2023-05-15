@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Slime
   - Panel_Speech_Bubble
+  - Palette_Color_1
+  - Palette_Color_2
+  - Palette_Color_3
+  - Palette_Color_Reset
   layers:
   - Default
   - TransparentFX
