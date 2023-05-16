@@ -8,7 +8,7 @@ public class Slime : MonoBehaviour
     private GameObject playerXrRig, speechBubble;
 
     private TextMeshProUGUI speechBubbleText;
-    private Vector3 speechBubbleOffset = new Vector3(0, 2, 0);
+    private Vector3 speechBubbleOffset = new Vector3(-1, 0.8f, -0.6f);
 
     void Start()
     {
