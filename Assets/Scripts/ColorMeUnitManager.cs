@@ -30,11 +30,31 @@ public class ColorMeUnitManager : MonoBehaviour
         
     }
 
-    public void InitGame()
+    public void StartGameEasy()
+    {
+        Debug.Log("Start Easy Pressed");
+        ColorMeGameManager.instance.difficulty = Difficulty.EASY;
+        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
+    }
+
+    public void StartGameNormal()
+    {
+        Debug.Log("Start Normal Pressed");
+        ColorMeGameManager.instance.difficulty = Difficulty.NORMAL;
+        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
+    }
+
+    public void StartGameHard()
+    {
+        Debug.Log("Start Hard Pressed");
+        ColorMeGameManager.instance.difficulty = Difficulty.HARD;
+        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
+    }
+
+    /* public void InitGame()
     {
         var slimeInstance = Instantiate(this.slimeGameObjects[0]);
         slimeInstance.transform.position = this.spawnPosition;
         slimeInstance.SetActive(true);
-        ColorMeGameManager.instance.UpdateGameState(GameState.MENU_PAUSE);
-    }
+    } */
 }

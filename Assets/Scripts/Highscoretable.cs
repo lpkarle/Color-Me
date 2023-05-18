@@ -51,7 +51,12 @@ public class Highscoretable : MonoBehaviour
 
 		highscoreEntryTransformList = new List<Transform>();
 
-		for (int i = 0; i < highscores.highscoreEntryList.Count; i++) {
+		int tableLength = highscores.highscoreEntryList.Count;
+
+		if (highscores.highscoreEntryList.Count > 6)
+			tableLength = 6;
+
+		for (int i = 0; i < tableLength; i++) {
 			CreateHighscoreEntryTransform(highscores.highscoreEntryList[i], entryContainer, highscoreEntryTransformList);
 		}
 		/*foreach (HighscoreEntry highscoreEntry in highscores.highscoreEntryList) {

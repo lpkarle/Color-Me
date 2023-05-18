@@ -25,7 +25,7 @@ public class ColorMixer : MonoBehaviour
             case Difficulty.EASY:
                 colorStep = 0.5f;
                 break;
-            case Difficulty.MEDIUM:
+            case Difficulty.NORMAL:
                 colorStep = 0.25f;
                 break;
             case Difficulty.HARD:

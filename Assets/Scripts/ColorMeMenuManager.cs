@@ -16,14 +16,6 @@ public class ColorMeMenuManager : MonoBehaviour
     [SerializeField]
     private Transform _locationPanel;
 
-    [SerializeField]
-    private Button  _btnStartEasy,
-                    _btnStartNormal,
-                    _btnStartHard,
-                    _btnStartTutorial,
-                    _btnStartHighscore,
-                    _btnHighscoreBackToStart;
-                    
     void Awake()
     {
         // subscribe to game manager event
@@ -47,7 +39,6 @@ public class ColorMeMenuManager : MonoBehaviour
         //_panelResult.transform.rotation = _locationPanel.rotation;
         _panelHighscore.transform.position = _locationPanel.position;
         _panelHighscore.transform.rotation = _locationPanel.rotation;
-
     }
 
     private void gameManagerOnGameStateChanged(GameState state)
@@ -57,12 +48,5 @@ public class ColorMeMenuManager : MonoBehaviour
         // TODO _panelTutorial.SetActive(state == GameState.MENU_RESULT);
         // TODO _panelResult.SetActive(state == GameState.MENU_RESULT);
         _panelHighscore.SetActive(state == GameState.MENU_HIGHSCORE);
-
-        // _btnStart.interactable = state == GameState.MENU_WELCOME;
-    }
-
-    public void BtnStartPressed()
-    {
-        Debug.Log("Start Pressed");
     }
 }
