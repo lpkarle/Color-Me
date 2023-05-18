@@ -48,16 +48,9 @@ public class ColorMeUnitManager : MonoBehaviour
         ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
-    /* public void InitGame()
-    {
-        var slimeInstance = Instantiate(this.slimeGameObjects[0]);
-        slimeInstance.transform.position = this.spawnPosition;
-        slimeInstance.SetActive(true);
-    } */
-
-
     public void lockColorPaletteAndPicker()
     {
+        Debug.Log("Start Hard Pressed");
         colorPalette.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         colorPicker.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
     }
@@ -66,5 +59,12 @@ public class ColorMeUnitManager : MonoBehaviour
     {
         colorPalette.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         colorPicker.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+    }
+
+    public void SpawnSlime()
+    {
+        var slimeInstance = Instantiate(this.slimeGameObjects[0]);
+        slimeInstance.transform.position = this.spawnPosition;
+        slimeInstance.SetActive(true);
     }
 }

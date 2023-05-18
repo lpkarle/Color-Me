@@ -44,7 +44,10 @@ public class ColorMeMenuManager : MonoBehaviour
     private void gameManagerOnGameStateChanged(GameState state)
     {
         _panelWelcome.SetActive(state == GameState.MENU_WELCOME);
-        _panelTimerScore.SetActive(state == GameState.GAME_PLAY);
+        _panelTimerScore.SetActive( state == GameState.GAME_PLAY || 
+                                    state == GameState.GAME_SLIME_COMING ||
+                                    state == GameState.GAME_MIX_COLOR ||
+                                    state == GameState.GAME_COLOR_SLIME);
         // TODO _panelTutorial.SetActive(state == GameState.MENU_RESULT);
         // TODO _panelResult.SetActive(state == GameState.MENU_RESULT);
         _panelHighscore.SetActive(state == GameState.MENU_HIGHSCORE);

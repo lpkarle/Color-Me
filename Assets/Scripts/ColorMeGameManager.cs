@@ -45,6 +45,15 @@ public class ColorMeGameManager : MonoBehaviour
             case GameState.GAME_PLAY:
                 HandleGamePlay();
                 break;
+            case GameState.GAME_SLIME_COMING:
+                HandleSlimeComing();
+                break;
+            case GameState.GAME_MIX_COLOR:
+                HandleMixColor();
+                break;
+            case GameState.GAME_COLOR_SLIME:
+                HandleColorSlime();
+                break;
             case GameState.MENU_RESULT:
                 HandleResultMenu();
                 break;
@@ -84,6 +93,25 @@ public class ColorMeGameManager : MonoBehaviour
         Debug.Log("Handle Game Play");
 
         ColorMeUnitManager.Instance.unlockColorPaletteAndPicker();
+        
+        UpdateGameState(GameState.GAME_SLIME_COMING);
+    }
+
+    private void HandleSlimeComing()
+    {
+        Debug.Log("Handle Slime Coming");
+
+        ColorMeUnitManager.Instance.SpawnSlime();
+    }
+
+    private void HandleMixColor()
+    {
+        Debug.Log("Handle Mix Color");
+    }
+
+    private void HandleColorSlime()
+    {
+        Debug.Log("Handle Color Slime");
     }
 
     private void HandleHighscoreMenu()
