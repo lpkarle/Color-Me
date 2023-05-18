@@ -42,9 +42,6 @@ public class ColorMeGameManager : MonoBehaviour
             case GameState.MENU_ONBOARDING:
                 HandleOnboardingMenu();
                 break;
-            case GameState.GAME_INIT:
-                HandleGameInit();
-                break;
             case GameState.GAME_PLAY:
                 break;
             case GameState.GAME_END:
@@ -76,13 +73,6 @@ public class ColorMeGameManager : MonoBehaviour
         Debug.Log("Handle Onboarding Menu");
     }
 
-    private void HandleGameInit()
-    {
-        Debug.Log("Handle Game Initialization");
-
-        ColorMeUnitManager.Instance.InitGame();
-    }
-
     private void HandlePauseMenu()
     {
         Debug.Log("Handle Pause Menu");
@@ -101,12 +91,12 @@ public enum GameState
     MENU_WELCOME,
     MENU_ONBOARDING,
 
-    GAME_INIT,
     GAME_PLAY,
     GAME_END,
     
     MENU_PAUSE,
-    MENU_RESULT
+    MENU_RESULT,
+    MENU_HIGHSCORE
 }
 
 public enum Difficulty

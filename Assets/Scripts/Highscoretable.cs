@@ -18,8 +18,23 @@ public class Highscoretable : MonoBehaviour
 
 
 		string jsonString = PlayerPrefs.GetString("highscoreTable");
+
+		
 		Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
 
+		if (highscores == null)
+		{
+			highscoreEntryList = new List<HighscoreEntry>() {
+				new HighscoreEntry{score = 0, name = "-"}
+			};
+			string json = JsonUtility.ToJson(highscoreEntryList);
+			PlayerPrefs.SetString("highscoreTable", json);
+			jsonString = PlayerPrefs.GetString("highscoreTable");
+
+		
+			highscores = JsonUtility.FromJson<Highscores>(jsonString);
+			
+		}
 
 		//sort
 
@@ -35,7 +50,8 @@ public class Highscoretable : MonoBehaviour
 
 
 		highscoreEntryTransformList = new List<Transform>();
-		for (int i = 0; i < 6; i++) {
+
+		for (int i = 0; i < highscores.highscoreEntryList.Count; i++) {
 			CreateHighscoreEntryTransform(highscores.highscoreEntryList[i], entryContainer, highscoreEntryTransformList);
 		}
 		/*foreach (HighscoreEntry highscoreEntry in highscores.highscoreEntryList) {

@@ -6,14 +6,24 @@ using UnityEngine.UI;
 public class ColorMeMenuManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _panelWelcome, _panelGameTimer, _panelSpeechBubble, _panelPause, _panelResult;
+    private GameObject  _panelWelcome, 
+                        _panelTutorial,
+                        _panelTimerScore, 
+                        _panelResult,
+                        _panelHighscore,
+                        _panelSpeechBubble;
 
     [SerializeField]
-    private Transform _locationWelcome, _locationGameTimer;
+    private Transform _locationPanel;
 
     [SerializeField]
-    private Button _btnStart;
-
+    private Button  _btnStartEasy,
+                    _btnStartNormal,
+                    _btnStartHard,
+                    _btnStartTutorial,
+                    _btnStartHighscore,
+                    _btnHighscoreBackToStart;
+                    
     void Awake()
     {
         // subscribe to game manager event
@@ -26,35 +36,33 @@ public class ColorMeMenuManager : MonoBehaviour
     }
 
     void Start()
-    {
-        
-    }
+    {  
+        _panelWelcome.transform.position = _locationPanel.position;
+        _panelWelcome.transform.rotation = _locationPanel.rotation;
+        _panelTimerScore.transform.position = _locationPanel.position;
+        _panelTimerScore.transform.rotation = _locationPanel.rotation;
+        //_panelTutorial.transform.position = _locationPanel.position;
+        //_panelTutorial.transform.rotation = _locationPanel.rotation;
+        //_panelResult.transform.position = _locationPanel.position;
+        //_panelResult.transform.rotation = _locationPanel.rotation;
+        _panelHighscore.transform.position = _locationPanel.position;
+        _panelHighscore.transform.rotation = _locationPanel.rotation;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
-
 
     private void gameManagerOnGameStateChanged(GameState state)
     {
-        _panelWelcome.transform.position = _locationWelcome.position;
-        _panelWelcome.transform.rotation = _locationWelcome.rotation;
         _panelWelcome.SetActive(state == GameState.MENU_WELCOME);
+        _panelTimerScore.SetActive(state == GameState.GAME_PLAY);
+        // TODO _panelTutorial.SetActive(state == GameState.MENU_RESULT);
+        // TODO _panelResult.SetActive(state == GameState.MENU_RESULT);
+        _panelHighscore.SetActive(state == GameState.MENU_HIGHSCORE);
 
-        _btnStart.interactable = state == GameState.MENU_WELCOME;
-
-//        _panelGameTimer.transform.position = _locationGameTimer.position;
-//        _panelGameTimer.transform.rotation = _locationGameTimer.rotation;
-  //      _panelGameTimer.SetActive(state == GameState.MENU_WELCOME);
+        // _btnStart.interactable = state == GameState.MENU_WELCOME;
     }
 
     public void BtnStartPressed()
     {
         Debug.Log("Start Pressed");
-
-        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_INIT);
-
     }
 }
