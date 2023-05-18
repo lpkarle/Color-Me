@@ -13,7 +13,7 @@ public class ColorMixer : MonoBehaviour
 
     private GameObject projectilePrefab;
     private Transform projectileStartPoint;
-    private float projectileLaunchSpeed = 1.5f;
+    private float projectileLaunchSpeed = 50.0f;
     private float projectileTTL = 5.0f;
 
     private Renderer[] colorObjectsRenderer;
@@ -38,15 +38,17 @@ public class ColorMixer : MonoBehaviour
             Renderer renderer = objToColor.GetComponent<Renderer>();
             renderer.material = newMaterial;
         }
-
     }
 
     private void Update() {
-        ShootColor();
+        
     }
 
     public void ShootColor()
     {
+        /* if (ColorMeGameManager.instance.state != GameState.GAME_MIX_COLOR)
+            return; */
+
         RaycastHit hit;
         
         if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity))
@@ -57,7 +59,8 @@ public class ColorMixer : MonoBehaviour
 
                 projectilePrefab = objectsToColor[2];
                 
-                GameObject projectile = Instantiate(projectilePrefab, this.transform.position, this.transform.rotation);
+                GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 0.18f, this.transform.rotation);
+                Physics.IgnoreCollision(projectile.GetComponent<Collider>(), this.GetComponent<Collider>());
                 
                 if (projectile.TryGetComponent(out Rigidbody rigidBody))
                 {
@@ -66,6 +69,9 @@ public class ColorMixer : MonoBehaviour
                 }
 
                 Destroy(projectile, projectileTTL);
+
+                ColorMeGameManager.instance.currentColorShoot = currentColor;
+                ColorMeGameManager.instance.UpdateGameState(GameState.GAME_COLOR_SLIME);
             }
         }
     }

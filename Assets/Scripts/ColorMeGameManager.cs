@@ -11,7 +11,9 @@ public class ColorMeGameManager : MonoBehaviour
 
     public Difficulty difficulty;
     public float difficultyColorSteps;
+
     public Color currentWantedColor;
+    public Color currentColorShoot;
 
     public int timer;
     public String playerName;
@@ -106,6 +108,8 @@ public class ColorMeGameManager : MonoBehaviour
 
         ColorMeUnitManager.Instance.SpawnSlime();
         ColorMeUnitManager.Instance.GenerateWantedSlimeColor();
+        
+        UpdateGameState(GameState.GAME_MIX_COLOR);
     }
 
     private void HandleMixColor()

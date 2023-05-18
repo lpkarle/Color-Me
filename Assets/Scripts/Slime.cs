@@ -25,7 +25,6 @@ public class Slime : MonoBehaviour
     void Update()
     {
         FaceThePlayer();
-
         ShowSpeechBubble();
     }
 
