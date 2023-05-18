@@ -20,17 +20,12 @@ public class ColorMeUnitManager : MonoBehaviour
         Instance = this;
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    { }
-
-    
-
     public void StartGameEasy()
     {
         Debug.Log("Start Easy Pressed");
         ColorMeGameManager.instance.difficulty = Difficulty.EASY;
+        ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.EASY;
+        
         ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
@@ -38,6 +33,8 @@ public class ColorMeUnitManager : MonoBehaviour
     {
         Debug.Log("Start Normal Pressed");
         ColorMeGameManager.instance.difficulty = Difficulty.NORMAL;
+        ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.NORMAL;
+
         ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
@@ -45,6 +42,8 @@ public class ColorMeUnitManager : MonoBehaviour
     {
         Debug.Log("Start Hard Pressed");
         ColorMeGameManager.instance.difficulty = Difficulty.HARD;
+        ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.HARD;
+
         ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
@@ -66,5 +65,25 @@ public class ColorMeUnitManager : MonoBehaviour
         var slimeInstance = Instantiate(this.slimeGameObjects[0]);
         slimeInstance.transform.position = this.spawnPosition;
         slimeInstance.SetActive(true);
+    }
+
+    public void GenerateWantedSlimeColor()
+    {
+        float colorSteps = ColorMeGameManager.instance.difficultyColorSteps;
+        var red = GetRandomFloat(colorSteps);
+        var green = GetRandomFloat(colorSteps);
+        var blue = GetRandomFloat(colorSteps);
+
+        Debug.Log("Wanted Color: " + red + " " + green + " " + blue);
+
+        ColorMeGameManager.instance.currentWantedColor = new Color(red, green, blue);
+    }
+
+    private float GetRandomFloat(float stepSize)
+    {
+        float numberSteps = 1.0f / stepSize;
+        int step = (int) Random.Range(0, numberSteps + 1);
+
+        return step * stepSize;
     }
 }

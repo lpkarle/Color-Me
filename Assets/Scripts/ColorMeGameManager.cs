@@ -9,8 +9,11 @@ public class ColorMeGameManager : MonoBehaviour
 
     public GameState state;
 
-    public int timer;
     public Difficulty difficulty;
+    public float difficultyColorSteps;
+    public Color currentWantedColor;
+
+    public int timer;
     public String playerName;
     public int playerScore;
 
@@ -102,6 +105,7 @@ public class ColorMeGameManager : MonoBehaviour
         Debug.Log("Handle Slime Coming");
 
         ColorMeUnitManager.Instance.SpawnSlime();
+        ColorMeUnitManager.Instance.GenerateWantedSlimeColor();
     }
 
     private void HandleMixColor()
@@ -118,6 +122,8 @@ public class ColorMeGameManager : MonoBehaviour
     {
         Debug.Log("Handle Highscore Menu");
     }
+
+    
 
 }
 
@@ -140,4 +146,11 @@ public enum Difficulty
     EASY,
     NORMAL,
     HARD
+}
+
+public static class DifficultyColorSteps 
+{
+    public const float EASY = 0.5f;
+    public const float NORMAL = 0.25f;
+    public const float HARD = 0.1f;
 }
