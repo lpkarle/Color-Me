@@ -932,7 +932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 93a126fcfaf164a0c9fddc7cf3193a32, type: 2}
+  m_Material: {fileID: 2100000, guid: 4372e157219214713a2ba41f55fff8ac, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -16017,11 +16017,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1088101573}
   m_CullTransparentMesh: 1
---- !u!1 &1091147838 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 410155430891272545, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
-  m_PrefabInstance: {fileID: 1282370552}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1103478178
 GameObject:
   m_ObjectHideFlags: 0
@@ -17831,6 +17826,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6173172085731050060, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
+      propertyPath: m_TagString
+      value: Slime
+      objectReference: {fileID: 0}
     - target: {fileID: 6836556466655795446, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -17906,6 +17905,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b31286f94b645bf86e3c817c8651c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &1282370558
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941044027}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.34167185
+  m_Height: 0.66477406
+  m_Direction: 1
+  m_Center: {x: 0.014182832, y: 0.3321713, z: 0}
 --- !u!1001 &1323423707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19513,7 +19526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
@@ -26995,7 +27008,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1878720915}
         m_TargetAssemblyTypeName: ColorMixer, Assembly-CSharp
-        m_MethodName: ShootColor
+        m_MethodName: PickColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27007,7 +27020,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1878720915}
         m_TargetAssemblyTypeName: ColorMixer, Assembly-CSharp
-        m_MethodName: PickColor
+        m_MethodName: ShootColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27129,7 +27142,7 @@ MonoBehaviour:
   objectsToColor:
   - {fileID: 1274944379}
   - {fileID: 127877453}
-  - {fileID: 1091147838}
+  - {fileID: 1971311620099415782, guid: 9438bfde2608a4ce7bcfb0ca57c5dc36, type: 3}
 --- !u!4 &1878720917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2832242168940840640, guid: 9c724ede1b4c64677a565eb423bdd441, type: 3}
@@ -29674,7 +29687,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3932509629646197790, guid: c8058f6a1dd41429096cf8079f532db3, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3932509629646197790, guid: c8058f6a1dd41429096cf8079f532db3, type: 3}
       propertyPath: m_LocalScale.x
@@ -29747,7 +29760,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6082190557950416183, guid: d68e575a0bd2641769ac72467f76d78b, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6082190557950416183, guid: d68e575a0bd2641769ac72467f76d78b, type: 3}
       propertyPath: m_LocalScale.y

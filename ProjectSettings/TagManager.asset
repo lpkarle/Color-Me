@@ -11,6 +11,7 @@ TagManager:
   - Palette_Color_3
   - Palette_Color_Reset
   - Wanted_Color
+  - Projectile
   layers:
   - Default
   - TransparentFX

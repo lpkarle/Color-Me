@@ -11,27 +11,22 @@ public class ColorMixer : MonoBehaviour
     [SerializeField]
     private GameObject[] objectsToColor;
 
+    private GameObject projectilePrefab;
+    private Transform projectileStartPoint;
+    private float projectileLaunchSpeed = 1.5f;
+    private float projectileTTL = 5.0f;
+
     private Renderer[] colorObjectsRenderer;
+
+    private float colorStep;
 
     private Material newMaterial;
     private Color currentColor;
-    private float colorStep;
     private float colorMaximumValue = 1.0f;
 
     void Start()
     {
-        switch (ColorMeGameManager.instance.difficulty)
-        {
-            case Difficulty.EASY:
-                colorStep = 0.5f;
-                break;
-            case Difficulty.NORMAL:
-                colorStep = 0.25f;
-                break;
-            case Difficulty.HARD:
-                colorStep = 0.1f;
-                break;
-        }
+        Debug.Log("COLOR MIXER colorStep: " + colorStep);
 
         // Set all objects to color to black => inital state
         newMaterial = new Material(Shader.Find("Standard"));
@@ -43,22 +38,45 @@ public class ColorMixer : MonoBehaviour
             Renderer renderer = objToColor.GetComponent<Renderer>();
             renderer.material = newMaterial;
         }
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void Update() {
+        ShootColor();
     }
 
     public void ShootColor()
     {
+        RaycastHit hit;
+        
+        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.CompareTag("Slime"))
+            {
+                Debug.Log("Ray Hit Slime");
+
+                projectilePrefab = objectsToColor[2];
+                
+                GameObject projectile = Instantiate(projectilePrefab, this.transform.position, this.transform.rotation);
+                
+                if (projectile.TryGetComponent(out Rigidbody rigidBody))
+                {
+                    Vector3 force = this.transform.forward * projectileLaunchSpeed;
+                    rigidBody.AddForce(force);
+                }
+
+                Destroy(projectile, projectileTTL);
+            }
+        }
     }
 
     public void PickColor()
     {
+        colorStep = ColorMeGameManager.instance.difficultyColorSteps;
+
         RaycastHit hit;
-        //bool isHit = Physics.Raycast(this.transform.position, this.transform.forward, out hit);
-        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity))
+
+        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity)) // TODO distance to color
         {
             if (hit.collider.CompareTag("Palette_Color_1"))
             {
