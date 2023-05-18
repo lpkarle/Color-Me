@@ -10,6 +10,7 @@ TagManager:
   - Palette_Color_2
   - Palette_Color_3
   - Palette_Color_Reset
+  - Wanted_Color
   layers:
   - Default
   - TransparentFX

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Slime : MonoBehaviour
 {
     private GameObject playerXrRig, speechBubble;
+    private Image imageWantedColor;
 
     private Vector3 speechBubbleOffset = new Vector3(-0.8f, 1.7f, -0.6f);
 
@@ -14,8 +16,10 @@ public class Slime : MonoBehaviour
         
         playerXrRig = GameObject.FindWithTag("Player");
         speechBubble = GameObject.FindWithTag("Panel_Speech_Bubble");
-
-        Debug.Log(speechBubble.transform.position);
+        
+        GameObject wantedColor = GameObject.FindWithTag("Wanted_Color");
+        imageWantedColor = wantedColor.GetComponent<Image>();
+        imageWantedColor.material.color = ColorMeGameManager.instance.currentWantedColor;
     }
 
     void Update()
