@@ -43,14 +43,13 @@ public class ColorMeGameManager : MonoBehaviour
                 HandleOnboardingMenu();
                 break;
             case GameState.GAME_PLAY:
+                HandleGamePlay();
                 break;
-            case GameState.GAME_END:
-                break;
-            case GameState.MENU_PAUSE:
-                HandlePauseMenu();
-                break;    
             case GameState.MENU_RESULT:
                 HandleResultMenu();
+                break;
+            case GameState.MENU_HIGHSCORE:
+                HandleHighscoreMenu();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -66,6 +65,8 @@ public class ColorMeGameManager : MonoBehaviour
     private void HandleWelcomeMenu()
     {
         Debug.Log("Handle Welcome Menu");
+
+        ColorMeUnitManager.Instance.lockColorPaletteAndPicker();
     }
 
     private void HandleOnboardingMenu()
@@ -73,16 +74,22 @@ public class ColorMeGameManager : MonoBehaviour
         Debug.Log("Handle Onboarding Menu");
     }
 
-    private void HandlePauseMenu()
-    {
-        Debug.Log("Handle Pause Menu");
-    }
-
     private void HandleResultMenu()
     {
         Debug.Log("Handle Result Menu");
     }
 
+    private void HandleGamePlay()
+    {
+        Debug.Log("Handle Game Play");
+
+        ColorMeUnitManager.Instance.unlockColorPaletteAndPicker();
+    }
+
+    private void HandleHighscoreMenu()
+    {
+        Debug.Log("Handle Highscore Menu");
+    }
 
 }
 
@@ -92,9 +99,10 @@ public enum GameState
     MENU_ONBOARDING,
 
     GAME_PLAY,
-    GAME_END,
-    
-    MENU_PAUSE,
+    GAME_SLIME_COMING,
+    GAME_MIX_COLOR,
+    GAME_COLOR_SLIME,
+
     MENU_RESULT,
     MENU_HIGHSCORE
 }

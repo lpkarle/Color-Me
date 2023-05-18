@@ -7,6 +7,9 @@ public class ColorMeUnitManager : MonoBehaviour
     public static ColorMeUnitManager Instance;
 
     [SerializeField]
+    private GameObject colorPalette, colorPicker;
+
+    [SerializeField]
     private GameObject[] slimeGameObjects;
 
     [SerializeField]
@@ -20,15 +23,9 @@ public class ColorMeUnitManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        
-    }
+    { }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     public void StartGameEasy()
     {
@@ -57,4 +54,17 @@ public class ColorMeUnitManager : MonoBehaviour
         slimeInstance.transform.position = this.spawnPosition;
         slimeInstance.SetActive(true);
     } */
+
+
+    public void lockColorPaletteAndPicker()
+    {
+        colorPalette.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        colorPicker.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+    }
+
+    public void unlockColorPaletteAndPicker()
+    {
+        colorPalette.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        colorPicker.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+    }
 }

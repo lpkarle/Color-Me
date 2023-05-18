@@ -14677,6 +14677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6a5e2c4aefa6804b8f7d2af9a9676b5, type: 3}
+--- !u!1 &941044027 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6173172085731050060, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
+  m_PrefabInstance: {fileID: 1282370552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &942096907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1289316788731868461, guid: a9a8a17fbc5ca2e47aa025e052d1aca7, type: 3}
@@ -15344,12 +15349,6 @@ MonoBehaviour:
   _panelHighscore: {fileID: 1142242670}
   _panelSpeechBubble: {fileID: 422601566}
   _locationPanel: {fileID: 1585117543}
-  _btnStartEasy: {fileID: 1461469015}
-  _btnStartNormal: {fileID: 1606086160}
-  _btnStartHard: {fileID: 1505170973}
-  _btnStartTutorial: {fileID: 1490831168}
-  _btnStartHighscore: {fileID: 1103478180}
-  _btnHighscoreBackToStart: {fileID: 0}
 --- !u!1001 &979248644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17758,7 +17757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6173172085731050060, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6836556466655795446, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
       propertyPath: m_RootOrder
@@ -18134,8 +18133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6442a6b78cc421cb5ae997e486de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorPalette: {fileID: 429190533}
+  colorPicker: {fileID: 1878720912}
   slimeGameObjects:
-  - {fileID: 8498986791028918267, guid: d1c8998e6add54eaab25d941515b2c18, type: 3}
+  - {fileID: 941044027}
   spawnPosition: {x: 2.5, y: 2.175, z: -2}
 --- !u!1001 &1384871554
 PrefabInstance:
