@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ColorMeMenuManager : MonoBehaviour
 {
+    public static ColorMeMenuManager Instance;
+
     [SerializeField]
     private GameObject  _panelWelcome, 
                         _panelTutorial,
@@ -14,10 +17,15 @@ public class ColorMeMenuManager : MonoBehaviour
                         _panelSpeechBubble;
 
     [SerializeField]
+    private TextMeshProUGUI ScoreText;
+
+    [SerializeField]
     private Transform _locationPanel;
 
     void Awake()
     {
+        Instance = this;
+
         // subscribe to game manager event
         ColorMeGameManager.onGameStateChanged += gameManagerOnGameStateChanged;
     }
@@ -39,6 +47,11 @@ public class ColorMeMenuManager : MonoBehaviour
         //_panelResult.transform.rotation = _locationPanel.rotation;
         _panelHighscore.transform.position = _locationPanel.position;
         _panelHighscore.transform.rotation = _locationPanel.rotation;
+    }
+
+    public void UpdateScore()
+    {
+        ScoreText.text = $"{ColorMeGameManager.instance.playerScore}";
     }
 
     private void gameManagerOnGameStateChanged(GameState state)

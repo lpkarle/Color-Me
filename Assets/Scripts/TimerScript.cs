@@ -4,14 +4,15 @@ using TMPro;
 
 public class TimerScript : MonoBehaviour
 {
-    public float TimeLeft;
     public bool TimerOn = false;
+    private float TimeLeft;
 
     public TextMeshProUGUI TimerTxt;
 
     void Start()
     {
         TimerOn = true;
+        TimeLeft = ColorMeGameManager.instance.Timer;
     }
 
     void Update()
@@ -28,6 +29,7 @@ public class TimerScript : MonoBehaviour
                 Debug.Log("Time is UP!");
                 TimeLeft = 0;
                 TimerOn = false;
+                ColorMeGameManager.instance.UpdateGameState(GameState.MENU_RESULT);
             }
         }
     }

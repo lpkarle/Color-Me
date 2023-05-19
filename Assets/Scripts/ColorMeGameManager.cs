@@ -15,9 +15,9 @@ public class ColorMeGameManager : MonoBehaviour
     public Color currentWantedColor;
     public Color currentColorShoot;
 
-    public int timer;
+    public float Timer = 100;
     public String playerName;
-    public int playerScore;
+    public int playerScore = 0;
 
     public static event Action<GameState> onGameStateChanged;
     // maby onBeforeGameStateChanged and onAfterGameStateChanged
@@ -120,6 +120,9 @@ public class ColorMeGameManager : MonoBehaviour
     private void HandleColorSlime()
     {
         Debug.Log("Handle Color Slime");
+
+        CalculatePointsByMixedColor();
+        ColorMeMenuManager.Instance.UpdateScore();
     }
 
     private void HandleHighscoreMenu()
@@ -127,7 +130,58 @@ public class ColorMeGameManager : MonoBehaviour
         Debug.Log("Handle Highscore Menu");
     }
 
-    
+    private void CalculatePointsByMixedColor()
+    {
+        var currentWantedColorVector = new Vector3(currentWantedColor.r, currentWantedColor.g, currentWantedColor.b);
+        var currentColorShootVector = new Vector3(currentColorShoot.r, currentColorShoot.g, currentColorShoot.b);
+        float colorDistanceAbs = Mathf.Abs(Vector3.Distance(currentWantedColorVector, currentColorShootVector));
+
+        // TODO schöner machen, Map!!!!!!!!!!!!!!!!!!!!!!!
+        float distanceExact = 0.0f;
+        float distanceInexact = 0.0f;
+        float distanceIninExact = 0.0f;
+        int pointsExact = 0;
+        int pointsInexact = 0;
+        int pointsIninExact = 0;
+
+        switch (difficulty)
+        {
+            case Difficulty.EASY:
+                distanceExact = 0.0f;
+                distanceInexact = 0.5f;
+                distanceIninExact = 1.0f;
+                pointsExact = 10;
+                pointsInexact = 5;
+                pointsIninExact = 0;
+                break;
+            case Difficulty.NORMAL:
+                distanceExact = 0.0f;
+                distanceInexact = 0.25f;
+                distanceIninExact = 0.5f;
+                pointsExact = 50;
+                pointsInexact = 25;
+                pointsIninExact = 10;
+                break;
+            case Difficulty.HARD:
+                distanceExact = 0.0f;
+                distanceInexact = 0.2f;
+                distanceIninExact = 0.5f;
+                pointsExact = 2000;
+                pointsInexact = 50;
+                pointsIninExact = 10;
+                break;
+        }
+        // TODO schöner machen, Map!!!!!!!!!!!!!!!!!!!!!!!
+
+        if (Mathf.Approximately(colorDistanceAbs, distanceExact))
+            playerScore += pointsExact;
+
+        else if (colorDistanceAbs <= distanceInexact)
+            playerScore += pointsInexact;
+        
+        else if (colorDistanceAbs <= distanceIninExact)
+            playerScore += pointsIninExact;
+    }
 
 }
 

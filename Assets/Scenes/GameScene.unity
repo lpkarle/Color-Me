@@ -13647,7 +13647,7 @@ MonoBehaviour:
   difficultyColorSteps: 0
   currentWantedColor: {r: 0, g: 0, b: 0, a: 0}
   currentColorShoot: {r: 0, g: 0, b: 0, a: 0}
-  timer: 0
+  Timer: 100
   playerName: 
   playerScore: 0
 --- !u!1 &729754051
@@ -15421,6 +15421,7 @@ MonoBehaviour:
   _panelResult: {fileID: 0}
   _panelHighscore: {fileID: 1142242670}
   _panelSpeechBubble: {fileID: 422601566}
+  ScoreText: {fileID: 1764117641}
   _locationPanel: {fileID: 1585117543}
 --- !u!1001 &979248644
 PrefabInstance:
@@ -28253,7 +28254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a13d2a5780cbf044acff0471ff9826b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeLeft: 300
   TimerOn: 0
   TimerTxt: {fileID: 2049175038}
 --- !u!222 &2049175040
