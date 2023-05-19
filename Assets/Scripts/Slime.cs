@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Slime : MonoBehaviour
 {
-    private GameObject slimeBody, playerXrRig, speechBubble;
-    private Image imageWantedColor;
+    [SerializeField]
+    private GameObject WantedColorPrefab;
+
+    private GameObject slimeBody, playerXrRig, speechBubble, WantedColor;
 
     private Vector3 speechBubbleOffset = new Vector3(-0.8f, 1.7f, -0.6f);
 
@@ -17,10 +19,11 @@ public class Slime : MonoBehaviour
         slimeBody = GameObject.FindWithTag("Slime_Body");
         playerXrRig = GameObject.FindWithTag("Player");
         speechBubble = GameObject.FindWithTag("Panel_Speech_Bubble");
-        
-        GameObject wantedColor = GameObject.FindWithTag("Wanted_Color");
-        imageWantedColor = wantedColor.GetComponent<Image>();
-        imageWantedColor.material.color = ColorMeGameManager.instance.currentWantedColor;
+
+        WantedColor = Instantiate(WantedColorPrefab);
+
+        /* imageWantedColor = wantedColor.GetComponent<Image>();
+        imageWantedColor.material.color = ColorMeGameManager.instance.currentWantedColor; */
     }
 
     void Update()
@@ -42,6 +45,12 @@ public class Slime : MonoBehaviour
         Vector3 direction = speechBubble.transform.position - playerXrRig.transform.position;
         speechBubble.transform.rotation = Quaternion.LookRotation(direction); 
         this.speechBubble.SetActive(true);
+
+
+        WantedColor.GetComponent<Renderer>().material.color = ColorMeGameManager.instance.currentWantedColor;
+        WantedColor.transform.position = speechBubble.transform.position + new Vector3(0.00f, 0.055f, 0.05f);
+        WantedColor.transform.rotation = speechBubble.transform.rotation;
+
     }
 
     private void OnCollisionEnter(Collision collision)
