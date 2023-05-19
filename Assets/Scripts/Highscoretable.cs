@@ -9,6 +9,7 @@ public class Highscoretable : MonoBehaviour
 	private Transform entryTemplate;
 	private List<HighscoreEntry> highscoreEntryList;
 	private List<Transform> highscoreEntryTransformList;
+
 	private void Awake()
 	{
 		entryContainer = transform.Find("Highscore_Entry_container");
@@ -63,6 +64,15 @@ public class Highscoretable : MonoBehaviour
 			CreateHighscoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
 		}*/
 
+	}
+
+	private void Start() 
+	{
+		var playerName = ColorMeGameManager.instance.playerName;
+		var playerScore = ColorMeGameManager.instance.playerScore;
+
+		if (playerName != "-")
+			AddHighscoreEntry(playerScore, playerName);
 	}
 
 	private void CreateHighscoreEntryTransform(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)
