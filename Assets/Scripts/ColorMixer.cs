@@ -47,8 +47,8 @@ public class ColorMixer : MonoBehaviour
     public void ShootColor()
     {
         // Only shoot once
-        /* if (ColorMeGameManager.instance.state != GameState.GAME_MIX_COLOR)
-            return; */
+        if (ColorMeGameManager.instance.state != GameState.GAME_MIX_COLOR)
+            return;
 
         RaycastHit hit;
         
@@ -72,7 +72,6 @@ public class ColorMixer : MonoBehaviour
                 Destroy(projectile, projectileTTL);
 
                 ColorMeGameManager.instance.currentColorShoot = currentColor;
-                ColorMeGameManager.instance.UpdateGameState(GameState.GAME_COLOR_SLIME);
             }
         }
     }

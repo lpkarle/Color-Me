@@ -15,9 +15,9 @@ public class ColorMeGameManager : MonoBehaviour
     public Color currentWantedColor;
     public Color currentColorShoot;
 
-    public float Timer = 100;
+    public float Timer;
     public String playerName;
-    public int playerScore = 0;
+    public int playerScore;
 
     public static event Action<GameState> onGameStateChanged;
     // maby onBeforeGameStateChanged and onAfterGameStateChanged
@@ -31,7 +31,7 @@ public class ColorMeGameManager : MonoBehaviour
     {
         UpdateGameState(GameState.MENU_WELCOME);
     }
-    
+
     public void UpdateGameState(GameState newState)
     {
         /* if (state == newState) return;
@@ -80,6 +80,10 @@ public class ColorMeGameManager : MonoBehaviour
     {
         Debug.Log("Handle Welcome Menu");
 
+        Timer = 10.0f;
+        playerName = "-";
+        playerScore = 0;
+
         ColorMeUnitManager.Instance.lockColorPaletteAndPicker();
     }
 
@@ -123,6 +127,11 @@ public class ColorMeGameManager : MonoBehaviour
 
         CalculatePointsByMixedColor();
         ColorMeMenuManager.Instance.UpdateScore();
+
+        // TODO Animation Happy/Sad
+        // TODO Animation Despawn
+
+        ColorMeUnitManager.Instance.DestroySlime();
     }
 
     private void HandleHighscoreMenu()

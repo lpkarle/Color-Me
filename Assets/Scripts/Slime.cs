@@ -14,16 +14,13 @@ public class Slime : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Slime");
+        Debug.Log("Start Slime -----------------------------------");
         
         slimeBody = GameObject.FindWithTag("Slime_Body");
         playerXrRig = GameObject.FindWithTag("Player");
         speechBubble = GameObject.FindWithTag("Panel_Speech_Bubble");
 
         WantedColor = Instantiate(WantedColorPrefab);
-
-        /* imageWantedColor = wantedColor.GetComponent<Image>();
-        imageWantedColor.material.color = ColorMeGameManager.instance.currentWantedColor; */
     }
 
     void Update()
@@ -44,8 +41,6 @@ public class Slime : MonoBehaviour
 
         Vector3 direction = speechBubble.transform.position - playerXrRig.transform.position;
         speechBubble.transform.rotation = Quaternion.LookRotation(direction); 
-        this.speechBubble.SetActive(true);
-
 
         WantedColor.GetComponent<Renderer>().material.color = ColorMeGameManager.instance.currentWantedColor;
         WantedColor.transform.position = speechBubble.transform.position + new Vector3(0.00f, 0.055f, 0.05f);
@@ -55,6 +50,9 @@ public class Slime : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (ColorMeGameManager.instance.state != GameState.GAME_MIX_COLOR)
+            return;
+    
         if (collision.gameObject.CompareTag("Projectile"))
         {
             var newSlimeColor = ColorMeGameManager.instance.currentColorShoot;
@@ -62,6 +60,11 @@ public class Slime : MonoBehaviour
             slimeBody.GetComponent<Renderer>().material.color = newSlimeColor;
 
             Destroy(GameObject.FindWithTag("Projectile"));
+            
+            ColorMeGameManager.instance.UpdateGameState(GameState.GAME_COLOR_SLIME);
+
+            Destroy(WantedColor);
+
         }
     }
 }

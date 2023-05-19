@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ColorMeUnitManager : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class ColorMeUnitManager : MonoBehaviour
 
     [SerializeField]
     private Vector3 spawnPosition = new Vector3(2.5f, 2.175f, -2);
+
+    private Vector3 testOffset = new Vector3(0.01f,0,0);
+
+    private GameObject slimeInstance;
 
     private void Awake() 
     {
@@ -62,9 +67,18 @@ public class ColorMeUnitManager : MonoBehaviour
 
     public void SpawnSlime()
     {
-        var slimeInstance = Instantiate(this.slimeGameObjects[0]);
+        testOffset += testOffset;
+
+        Debug.Log("Unit Manager Spawn Slime, Array Size: "+slimeGameObjects.Length);
+        slimeInstance = Instantiate(this.slimeGameObjects[0]);
         slimeInstance.transform.position = this.spawnPosition;
         slimeInstance.SetActive(true);
+    }
+
+    public void DestroySlime()
+    {
+        slimeInstance.SetActive(false);
+        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_SLIME_COMING);
     }
 
     public void GenerateWantedSlimeColor()
@@ -85,5 +99,15 @@ public class ColorMeUnitManager : MonoBehaviour
         int step = (int) Random.Range(0, numberSteps + 1);
 
         return step * stepSize;
+    }
+
+    public void ReturnToWelcomeScreen()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void SaveScore()
+    {
+        ColorMeGameManager.instance.UpdateGameState(GameState.MENU_HIGHSCORE);
     }
 }
