@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class ColorMeUnitManager : MonoBehaviour
@@ -19,6 +20,8 @@ public class ColorMeUnitManager : MonoBehaviour
     private Vector3 testOffset = new Vector3(0.01f,0,0);
 
     private GameObject slimeInstance;
+
+    private TouchScreenKeyboard keyboard;
 
     private void Awake() 
     {
@@ -106,8 +109,23 @@ public class ColorMeUnitManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void SaveScore()
+    public void ShowHighscore()
     {
         ColorMeGameManager.instance.UpdateGameState(GameState.MENU_HIGHSCORE);
+    }
+
+    public void SaveScore()
+    {
+        var inputPlayerName = GameObject.FindWithTag("Input_Player_Name").GetComponent<TMP_InputField>().text;
+        ColorMeGameManager.instance.playerName = inputPlayerName;
+        Debug.Log(
+            "-------------------- SaveScore"
+        );
+        ColorMeGameManager.instance.UpdateGameState(GameState.MENU_HIGHSCORE);
+    }
+
+    public void ShowKeyboard()
+    {
+        keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
     }
 }

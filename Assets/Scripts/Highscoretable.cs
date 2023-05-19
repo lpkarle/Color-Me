@@ -10,8 +10,18 @@ public class Highscoretable : MonoBehaviour
 	private List<HighscoreEntry> highscoreEntryList;
 	private List<Transform> highscoreEntryTransformList;
 
-	private void Awake()
+	private void Start()
 	{
+		var playerName = ColorMeGameManager.instance.playerName;
+		var playerScore = ColorMeGameManager.instance.playerScore;
+
+		Debug.Log(
+            "-------------------- HIGHSCORE"
+        );
+
+		if (playerName != "-")
+			AddHighscoreEntry(playerScore, playerName);
+
 		entryContainer = transform.Find("Highscore_Entry_container");
 		entryTemplate = entryContainer.Find("Highscore_Entry_Template");
 
@@ -54,8 +64,8 @@ public class Highscoretable : MonoBehaviour
 
 		int tableLength = highscores.highscoreEntryList.Count;
 
-		if (highscores.highscoreEntryList.Count > 6)
-			tableLength = 6;
+		if (highscores.highscoreEntryList.Count > 5)
+			tableLength = 5;
 
 		for (int i = 0; i < tableLength; i++) {
 			CreateHighscoreEntryTransform(highscores.highscoreEntryList[i], entryContainer, highscoreEntryTransformList);
@@ -64,15 +74,6 @@ public class Highscoretable : MonoBehaviour
 			CreateHighscoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
 		}*/
 
-	}
-
-	private void Start() 
-	{
-		var playerName = ColorMeGameManager.instance.playerName;
-		var playerScore = ColorMeGameManager.instance.playerScore;
-
-		if (playerName != "-")
-			AddHighscoreEntry(playerScore, playerName);
 	}
 
 	private void CreateHighscoreEntryTransform(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)

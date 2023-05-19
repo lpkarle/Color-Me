@@ -13,6 +13,7 @@ TagManager:
   - Wanted_Color
   - Projectile
   - Slime_Body
+  - Input_Player_Name
   layers:
   - Default
   - TransparentFX
