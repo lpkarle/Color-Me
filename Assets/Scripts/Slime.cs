@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Slime : MonoBehaviour
 {
-    private GameObject playerXrRig, speechBubble;
+    private GameObject slimeBody, playerXrRig, speechBubble;
     private Image imageWantedColor;
 
     private Vector3 speechBubbleOffset = new Vector3(-0.8f, 1.7f, -0.6f);
@@ -14,6 +14,7 @@ public class Slime : MonoBehaviour
     {
         Debug.Log("Slime");
         
+        slimeBody = GameObject.FindWithTag("Slime_Body");
         playerXrRig = GameObject.FindWithTag("Player");
         speechBubble = GameObject.FindWithTag("Panel_Speech_Bubble");
         
@@ -41,5 +42,17 @@ public class Slime : MonoBehaviour
         Vector3 direction = speechBubble.transform.position - playerXrRig.transform.position;
         speechBubble.transform.rotation = Quaternion.LookRotation(direction); 
         this.speechBubble.SetActive(true);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            var newSlimeColor = ColorMeGameManager.instance.currentColorShoot;
+
+            slimeBody.GetComponent<Renderer>().material.color = newSlimeColor;
+
+            Destroy(GameObject.FindWithTag("Projectile"));
+        }
     }
 }

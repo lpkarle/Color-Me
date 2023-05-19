@@ -34,8 +34,8 @@ public class ColorMeGameManager : MonoBehaviour
     
     public void UpdateGameState(GameState newState)
     {
-        // if (state == newState) return;
-        // onBeforeStateChanged?.Invoke(newState);
+        /* if (state == newState) return;
+            onBeforeStateChanged?.Invoke(newState); */
 
         state = newState;
 

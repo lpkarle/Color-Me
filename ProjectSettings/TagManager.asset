@@ -12,6 +12,7 @@ TagManager:
   - Palette_Color_Reset
   - Wanted_Color
   - Projectile
+  - Slime_Body
   layers:
   - Default
   - TransparentFX

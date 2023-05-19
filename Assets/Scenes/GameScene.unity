@@ -13646,6 +13646,7 @@ MonoBehaviour:
   difficulty: 0
   difficultyColorSteps: 0
   currentWantedColor: {r: 0, g: 0, b: 0, a: 0}
+  currentColorShoot: {r: 0, g: 0, b: 0, a: 0}
   timer: 0
   playerName: 
   playerScore: 0
@@ -17817,6 +17818,10 @@ PrefabInstance:
     - target: {fileID: 161877799810867857, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.409
+      objectReference: {fileID: 0}
+    - target: {fileID: 410155430891272545, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
+      propertyPath: m_TagString
+      value: Slime_Body
       objectReference: {fileID: 0}
     - target: {fileID: 6173172085731050060, guid: fa12db7f8a3f0714799c08ee4da865d6, type: 3}
       propertyPath: m_Name
