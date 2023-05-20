@@ -14207,6 +14207,7 @@ MonoBehaviour:
   Timer: 100
   playerName: 
   playerScore: 0
+  CurrentSlimeFace: 0
 --- !u!1 &729754051
 GameObject:
   m_ObjectHideFlags: 0
@@ -18610,6 +18611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WantedColorPrefab: {fileID: 8991099872565531609, guid: 3c775fbd90dd6494db482c8d96a47fff, type: 3}
   speechBubble: {fileID: 422601566}
+  faces: {fileID: 11400000, guid: 8b8a7554fceb39841840f45a2d8da540, type: 2}
+  animator: {fileID: 1282370559}
 --- !u!136 &1282370558
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -18624,6 +18627,27 @@ CapsuleCollider:
   m_Height: 0.66477406
   m_Direction: 1
   m_Center: {x: 0.014182832, y: 0.3321713, z: 0}
+--- !u!95 &1282370559
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941044027}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: eb340672e17c0af4089e561b61cdc548, type: 3}
+  m_Controller: {fileID: 9100000, guid: 707b944f06051734793367fc0c69bc07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1297614791
 GameObject:
   m_ObjectHideFlags: 0

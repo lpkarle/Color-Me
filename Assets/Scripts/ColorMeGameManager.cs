@@ -18,6 +18,7 @@ public class ColorMeGameManager : MonoBehaviour
     public float Timer;
     public String playerName;
     public int playerScore;
+    public SlimeFaceState CurrentSlimeFace;
 
     public static event Action<GameState> onGameStateChanged;
     // maby onBeforeGameStateChanged and onAfterGameStateChanged
@@ -95,6 +96,7 @@ public class ColorMeGameManager : MonoBehaviour
     private void HandleResultMenu()
     {
         Debug.Log("Handle Result Menu");
+        ColorMeUnitManager.Instance.DestroySlime();
     }
 
     private void HandleGamePlay()
@@ -110,6 +112,7 @@ public class ColorMeGameManager : MonoBehaviour
     {
         Debug.Log("Handle Slime Coming");
 
+        CurrentSlimeFace = SlimeFaceState.IDLE;
         ColorMeUnitManager.Instance.SpawnSlime();
         ColorMeUnitManager.Instance.GenerateWantedSlimeColor();
     }
@@ -181,15 +184,23 @@ public class ColorMeGameManager : MonoBehaviour
         // TODO schöner machen, Map!!!!!!!!!!!!!!!!!!!!!!!
 
         if (Mathf.Approximately(colorDistanceAbs, distanceExact))
+        {
             playerScore += pointsExact;
-
+            CurrentSlimeFace = SlimeFaceState.HAPPY;
+        }
         else if (colorDistanceAbs <= distanceInexact)
+        {
             playerScore += pointsInexact;
-        
+            CurrentSlimeFace = SlimeFaceState.HAPPY;
+        }
         else if (colorDistanceAbs <= distanceIninExact)
+        {
             playerScore += pointsIninExact;
+            CurrentSlimeFace = SlimeFaceState.SAD;
+        }
+        else
+            CurrentSlimeFace = SlimeFaceState.DEAD;
     }
-
 }
 
 public enum GameState

@@ -12,6 +12,10 @@ public class Slime : MonoBehaviour
 
     private Vector3 speechBubbleOffset = new Vector3(-0.8f, 1.7f, -0.6f);
 
+    public Face faces;
+    public Animator animator;
+    private Material faceMaterial;
+
     void Start()
     {
         Debug.Log("Start Slime -----------------------------------");
@@ -21,12 +25,21 @@ public class Slime : MonoBehaviour
         
         speechBubble.SetActive(true);
         WantedColor = Instantiate(WantedColorPrefab);
+
+        faceMaterial = slimeBody.GetComponent<Renderer>().materials[1];
+        SetFace(faces.Idleface);
     }
 
     void Update()
     {
+        ShowFaceByState();
         FaceThePlayer();
         ShowSpeechBubble();
+    }
+
+    void SetFace(Texture tex)
+    {
+        faceMaterial.SetTexture("_MainTex", tex);
     }
 
     private void FaceThePlayer()
@@ -46,6 +59,12 @@ public class Slime : MonoBehaviour
         WantedColor.transform.position = speechBubble.transform.position + new Vector3(0.00f, 0.055f, 0.05f);
         WantedColor.transform.rotation = speechBubble.transform.rotation;
 
+        if(ColorMeGameManager.instance.state == GameState.MENU_RESULT)
+        {
+            speechBubble.SetActive(false);
+            Destroy(WantedColor);
+        }
+            
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -70,4 +89,32 @@ public class Slime : MonoBehaviour
             speechBubble.SetActive(false);
         }
     }
+
+    private void ShowFaceByState()
+    {
+        switch (ColorMeGameManager.instance.CurrentSlimeFace)
+        {
+            case SlimeFaceState.IDLE:
+                SetFace(faces.Idleface);
+                break;
+            case SlimeFaceState.HAPPY:
+                SetFace(faces.jumpFace);
+                break;
+            case SlimeFaceState.SAD:
+                SetFace(faces.attackFace);
+                break;
+            case SlimeFaceState.DEAD:
+                SetFace(faces.damageFace);
+                break;
+        }
+    }
+
+}
+
+public enum SlimeFaceState 
+{ 
+    IDLE, 
+    HAPPY, 
+    SAD, 
+    DEAD 
 }
