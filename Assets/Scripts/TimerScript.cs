@@ -29,6 +29,7 @@ public class TimerScript : MonoBehaviour
                 Debug.Log("Time is UP!");
                 TimeLeft = 0;
                 TimerOn = false;
+                ColorMeGameManager.instance.Timer = TimeLeft;
                 ColorMeGameManager.instance.UpdateGameState(GameState.MENU_RESULT);
             }
         }

@@ -80,7 +80,7 @@ public class ColorMeGameManager : MonoBehaviour
     {
         Debug.Log("Handle Welcome Menu");
 
-        Timer = 10.0f;
+        Timer = 30.0f;
         playerName = "-";
         playerScore = 0;
 
@@ -112,8 +112,6 @@ public class ColorMeGameManager : MonoBehaviour
 
         ColorMeUnitManager.Instance.SpawnSlime();
         ColorMeUnitManager.Instance.GenerateWantedSlimeColor();
-        
-        UpdateGameState(GameState.GAME_MIX_COLOR);
     }
 
     private void HandleMixColor()

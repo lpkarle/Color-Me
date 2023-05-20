@@ -12,8 +12,7 @@ public class ColorMeMenuManager : MonoBehaviour
     private GameObject  _panelWelcome, 
                         _panelTimerScore, 
                         _panelResult,
-                        _panelHighscore,
-                        _panelSpeechBubble;
+                        _panelHighscore;
 
     [SerializeField]
     private TextMeshProUGUI TimerScoreText, ResultScoreText;
@@ -56,10 +55,6 @@ public class ColorMeMenuManager : MonoBehaviour
     {
         _panelWelcome.SetActive(state == GameState.MENU_WELCOME);
         _panelTimerScore.SetActive( state == GameState.GAME_PLAY || 
-                                    state == GameState.GAME_SLIME_COMING ||
-                                    state == GameState.GAME_MIX_COLOR ||
-                                    state == GameState.GAME_COLOR_SLIME);
-        _panelSpeechBubble.SetActive( state == GameState.GAME_PLAY || 
                                     state == GameState.GAME_SLIME_COMING ||
                                     state == GameState.GAME_MIX_COLOR ||
                                     state == GameState.GAME_COLOR_SLIME);

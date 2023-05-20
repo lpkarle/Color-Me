@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class Slime : MonoBehaviour
 {
     [SerializeField]
-    private GameObject WantedColorPrefab;
+    private GameObject WantedColorPrefab, speechBubble;
 
-    private GameObject slimeBody, playerXrRig, speechBubble, WantedColor;
+    private GameObject slimeBody, playerXrRig, WantedColor;
 
     private Vector3 speechBubbleOffset = new Vector3(-0.8f, 1.7f, -0.6f);
 
@@ -18,8 +18,8 @@ public class Slime : MonoBehaviour
         
         slimeBody = GameObject.FindWithTag("Slime_Body");
         playerXrRig = GameObject.FindWithTag("Player");
-        speechBubble = GameObject.FindWithTag("Panel_Speech_Bubble");
-
+        
+        speechBubble.SetActive(true);
         WantedColor = Instantiate(WantedColorPrefab);
     }
 
@@ -52,7 +52,10 @@ public class Slime : MonoBehaviour
     {
         if (ColorMeGameManager.instance.state != GameState.GAME_MIX_COLOR)
             return;
-    
+
+        if (Mathf.Approximately(ColorMeGameManager.instance.Timer, 0.0f))
+            return;
+
         if (collision.gameObject.CompareTag("Projectile"))
         {
             var newSlimeColor = ColorMeGameManager.instance.currentColorShoot;
@@ -64,7 +67,7 @@ public class Slime : MonoBehaviour
             ColorMeGameManager.instance.UpdateGameState(GameState.GAME_COLOR_SLIME);
 
             Destroy(WantedColor);
-
+            speechBubble.SetActive(false);
         }
     }
 }

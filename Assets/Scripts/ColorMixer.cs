@@ -13,8 +13,8 @@ public class ColorMixer : MonoBehaviour
 
     private GameObject projectilePrefab;
     private Transform projectileStartPoint;
-    private float projectileLaunchSpeed = 50.0f;
-    private float projectileTTL = 5.0f;
+    private float projectileLaunchSpeed = 70.0f;
+    private float projectileTTL = 2.5f;
 
     private Renderer[] colorObjectsRenderer;
 

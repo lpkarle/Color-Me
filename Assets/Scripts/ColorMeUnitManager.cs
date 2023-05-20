@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class ColorMeUnitManager : MonoBehaviour
 {
     public static ColorMeUnitManager Instance;
 
     [SerializeField]
-    private GameObject colorPalette, colorPicker;
+    private GameObject colorPalette, colorPicker, smokeVFX;
 
     [SerializeField]
     private GameObject[] slimeGameObjects;
 
     [SerializeField]
     private Vector3 spawnPosition = new Vector3(2.5f, 2.175f, -2);
-
-    private Vector3 testOffset = new Vector3(0.01f,0,0);
 
     private GameObject slimeInstance;
 
@@ -68,20 +67,34 @@ public class ColorMeUnitManager : MonoBehaviour
         colorPicker.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
 
-    public void SpawnSlime()
+    public async void SpawnSlime()
     {
-        testOffset += testOffset;
+        PlaySmokeVFX();
 
-        Debug.Log("Unit Manager Spawn Slime, Array Size: "+slimeGameObjects.Length);
-        slimeInstance = Instantiate(this.slimeGameObjects[0]);
-        slimeInstance.transform.position = this.spawnPosition;
-        slimeInstance.SetActive(true);
+        await Delay(500);
+
+        if (ColorMeGameManager.instance.state != GameState.MENU_RESULT)
+        {
+            slimeInstance = Instantiate(this.slimeGameObjects[0]);
+            slimeInstance.transform.position = this.spawnPosition;
+            slimeInstance.SetActive(true);
+
+            ColorMeGameManager.instance.UpdateGameState(GameState.GAME_MIX_COLOR);
+        }
     }
 
-    public void DestroySlime()
+    public async void DestroySlime()
     {
+        await Delay(1000);
+
+        PlaySmokeVFX();
+
         slimeInstance.SetActive(false);
-        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_SLIME_COMING);
+
+        await Delay(1000);
+
+        if (ColorMeGameManager.instance.state != GameState.MENU_RESULT)
+            ColorMeGameManager.instance.UpdateGameState(GameState.GAME_SLIME_COMING);
     }
 
     public void GenerateWantedSlimeColor()
@@ -127,5 +140,20 @@ public class ColorMeUnitManager : MonoBehaviour
     public void ShowKeyboard()
     {
         keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
+    }
+
+    private void PlaySmokeVFX()
+    {
+        var smokeInstance = Instantiate(smokeVFX);
+        smokeInstance.transform.localScale *= 0.7f;
+        smokeInstance.transform.position = this.spawnPosition;
+        Destroy(smokeInstance, 3.0f);
+    }
+
+    private async Task Delay(int milliseconds)
+    {
+        Debug.Log("START DELAY");
+
+        await Task.Delay(milliseconds);
     }
 }
