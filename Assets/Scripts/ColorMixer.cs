@@ -11,6 +11,12 @@ public class ColorMixer : MonoBehaviour
     [SerializeField]
     private GameObject[] objectsToColor;
 
+    [SerializeField]
+    private AudioSource AudioSource;
+
+    [SerializeField]
+    private List<AudioClip> AudioClips;
+
     private GameObject projectilePrefab;
     private Transform projectileStartPoint;
     private float projectileLaunchSpeed = 70.0f;
@@ -67,6 +73,9 @@ public class ColorMixer : MonoBehaviour
                 {
                     Vector3 force = this.transform.forward * projectileLaunchSpeed;
                     rigidBody.AddForce(force);
+
+                    AudioSource.volume = 0.4f; 
+                    AudioSource.PlayOneShot(AudioClips[1]);
                 }
 
                 Destroy(projectile, projectileTTL);
@@ -86,9 +95,11 @@ public class ColorMixer : MonoBehaviour
 
         if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, distanceToColor))
         {
+            AudioSource.volume = 0.8f; 
+
             if (hit.collider.CompareTag("Palette_Color_1"))
             {
-                Debug.Log("COLOR 1");
+                AudioSource.PlayOneShot(AudioClips[0]);
 
                 if (currentColor.b < colorMaximumValue)
                     currentColor.b += colorStep;
@@ -96,7 +107,7 @@ public class ColorMixer : MonoBehaviour
 
             if (hit.collider.CompareTag("Palette_Color_2"))
             {
-                Debug.Log("COLOR 2");
+                AudioSource.PlayOneShot(AudioClips[0]);
 
                 if (currentColor.g < colorMaximumValue)
                     currentColor.g += colorStep;
@@ -104,7 +115,7 @@ public class ColorMixer : MonoBehaviour
 
             if (hit.collider.CompareTag("Palette_Color_3"))
             {
-                Debug.Log("COLOR 3");
+                AudioSource.PlayOneShot(AudioClips[0]);
                 
                 if (currentColor.r < colorMaximumValue)
                     currentColor.r += colorStep;
@@ -112,7 +123,7 @@ public class ColorMixer : MonoBehaviour
 
             if (hit.collider.CompareTag("Palette_Color_Reset"))
             {
-                Debug.Log("COLOR Reset");
+                AudioSource.PlayOneShot(AudioClips[0]);
 
                 if (currentColor.r >= colorStep)
                     currentColor.r -= colorStep;
