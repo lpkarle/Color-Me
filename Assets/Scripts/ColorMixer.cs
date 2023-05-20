@@ -82,7 +82,9 @@ public class ColorMixer : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity)) // TODO distance to color
+        var distanceToColor = 0.1f;
+
+        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, distanceToColor))
         {
             if (hit.collider.CompareTag("Palette_Color_1"))
             {
