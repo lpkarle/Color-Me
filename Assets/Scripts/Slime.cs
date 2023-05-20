@@ -8,6 +8,12 @@ public class Slime : MonoBehaviour
     [SerializeField]
     private GameObject WantedColorPrefab, speechBubble;
 
+    [SerializeField]
+    private AudioSource AudioSourceVFX;
+
+    [SerializeField]
+    private List<AudioClip> AudioClips;
+
     private GameObject slimeBody, playerXrRig, WantedColor;
 
     private Vector3 speechBubbleOffset = new Vector3(-0.8f, 1.7f, -0.6f);
@@ -64,7 +70,6 @@ public class Slime : MonoBehaviour
             speechBubble.SetActive(false);
             Destroy(WantedColor);
         }
-            
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -77,6 +82,8 @@ public class Slime : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Projectile"))
         {
+            AudioSourceVFX.PlayOneShot(AudioClips[0]);
+
             var newSlimeColor = ColorMeGameManager.instance.currentColorShoot;
 
             slimeBody.GetComponent<Renderer>().material.color = newSlimeColor;

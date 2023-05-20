@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ColorMeGameManager : MonoBehaviour
@@ -35,9 +36,6 @@ public class ColorMeGameManager : MonoBehaviour
 
     public void UpdateGameState(GameState newState)
     {
-        /* if (state == newState) return;
-            onBeforeStateChanged?.Invoke(newState); */
-
         state = newState;
 
         switch (newState)
@@ -70,8 +68,6 @@ public class ColorMeGameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
 
-        // onAfterStateChanged?.Invoke(newState);
-
         onGameStateChanged?.Invoke(newState);
 
         Debug.Log($"New state: {newState}.");
@@ -97,6 +93,7 @@ public class ColorMeGameManager : MonoBehaviour
     {
         Debug.Log("Handle Result Menu");
         ColorMeUnitManager.Instance.DestroySlime();
+        ColorMeUnitManager.Instance.PlayResultSound();
     }
 
     private void HandleGamePlay()
@@ -122,13 +119,15 @@ public class ColorMeGameManager : MonoBehaviour
         Debug.Log("Handle Mix Color");
     }
 
-    private void HandleColorSlime()
+    private async void HandleColorSlime()
     {
-        Debug.Log("Handle Color Slime");
+        await Delay(200);
 
         CalculatePointsByMixedColor();
-        ColorMeMenuManager.Instance.UpdateScore();
 
+        ColorMeUnitManager.Instance.PlaySlimeColoredSound();
+
+        ColorMeMenuManager.Instance.UpdateScore();
 
         ColorMeUnitManager.Instance.DestroySlime();
     }
@@ -194,10 +193,17 @@ public class ColorMeGameManager : MonoBehaviour
         else if (colorDistanceAbs <= distanceIninExact)
         {
             playerScore += pointsIninExact;
-            CurrentSlimeFace = SlimeFaceState.SAD;
+            CurrentSlimeFace = SlimeFaceState.IDLE;
         }
         else
-            CurrentSlimeFace = SlimeFaceState.DEAD;
+            CurrentSlimeFace = SlimeFaceState.SAD;
+    }
+
+    private async Task Delay(int milliseconds)
+    {
+        Debug.Log("START DELAY");
+
+        await Task.Delay(milliseconds);
     }
 }
 

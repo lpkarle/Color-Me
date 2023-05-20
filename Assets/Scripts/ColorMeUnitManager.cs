@@ -16,6 +16,12 @@ public class ColorMeUnitManager : MonoBehaviour
     private GameObject[] slimeGameObjects;
 
     [SerializeField]
+    private AudioSource AudioSourceVFX, AudioSourceSlime;
+
+    [SerializeField]
+    private List<AudioClip> AudioClips;
+
+    [SerializeField]
     private Vector3 spawnPosition = new Vector3(2.5f, 2.175f, -2);
 
     private GameObject slimeInstance;
@@ -27,29 +33,35 @@ public class ColorMeUnitManager : MonoBehaviour
         Instance = this;
     }
 
-    public void StartGameEasy()
+    public async void StartGameEasy()
     {
         Debug.Log("Start Easy Pressed");
         ColorMeGameManager.instance.difficulty = Difficulty.EASY;
         ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.EASY;
+
+        await Delay(500);
         
         ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
-    public void StartGameNormal()
+    public async void StartGameNormal()
     {
         Debug.Log("Start Normal Pressed");
         ColorMeGameManager.instance.difficulty = Difficulty.NORMAL;
         ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.NORMAL;
 
+        await Delay(500);
+
         ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
-    public void StartGameHard()
+    public async void StartGameHard()
     {
         Debug.Log("Start Hard Pressed");
         ColorMeGameManager.instance.difficulty = Difficulty.HARD;
         ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.HARD;
+        
+        await Delay(500);
 
         ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
     }
@@ -85,9 +97,11 @@ public class ColorMeUnitManager : MonoBehaviour
 
     public async void DestroySlime()
     {
-        await Delay(1000);
+        await Delay(500);
 
         PlaySmokeVFX();
+
+        await Delay(200);
 
         slimeInstance.SetActive(false);
 
@@ -142,8 +156,34 @@ public class ColorMeUnitManager : MonoBehaviour
         keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
     }
 
+    public void PlaySlimeColoredSound()
+    {
+        switch (ColorMeGameManager.instance.CurrentSlimeFace)
+        {
+            case SlimeFaceState.HAPPY:
+                AudioSourceVFX.PlayOneShot(AudioClips[2]);
+                break;
+            case SlimeFaceState.IDLE:
+                AudioSourceVFX.PlayOneShot(AudioClips[3]);
+                break;
+            case SlimeFaceState.SAD:
+                AudioSourceVFX.PlayOneShot(AudioClips[4]);
+                break;
+            case SlimeFaceState.DEAD:
+                AudioSourceVFX.PlayOneShot(AudioClips[5]);
+                break;
+        }
+    }
+
+    public void PlayResultSound()
+    {
+        AudioSourceVFX.PlayOneShot(AudioClips[1]);
+    }
+
     private void PlaySmokeVFX()
     {
+        AudioSourceVFX.PlayOneShot(AudioClips[0]);
+
         var smokeInstance = Instantiate(smokeVFX);
         smokeInstance.transform.localScale *= 0.7f;
         smokeInstance.transform.position = this.spawnPosition;
