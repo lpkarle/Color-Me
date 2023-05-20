@@ -129,8 +129,6 @@ public class ColorMeGameManager : MonoBehaviour
         CalculatePointsByMixedColor();
         ColorMeMenuManager.Instance.UpdateScore();
 
-        // TODO Animation Happy/Sad
-        // TODO Animation Despawn
 
         ColorMeUnitManager.Instance.DestroySlime();
     }

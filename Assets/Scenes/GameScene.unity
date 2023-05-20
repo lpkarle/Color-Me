@@ -7939,7 +7939,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 429190539}
+        m_TargetAssemblyTypeName: ResetGrabObjectToSocket, Assembly-CSharp
+        m_MethodName: resetToAttachpoint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -8045,6 +8057,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2157152693897185994, guid: 861c583fa4f2c4d70a6e9e6e31494c0f, type: 3}
   m_PrefabInstance: {fileID: 429190532}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &429190539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429190533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d71e721e75843119366f5f29a8adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SocketAttachpoint: {fileID: 845166234}
 --- !u!1 &457148552
 GameObject:
   m_ObjectHideFlags: 0
@@ -27975,7 +28000,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1878720919}
+        m_TargetAssemblyTypeName: ResetGrabObjectToSocket, Assembly-CSharp
+        m_MethodName: resetToAttachpoint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls:
@@ -28121,6 +28158,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2832242168940840640, guid: 9c724ede1b4c64677a565eb423bdd441, type: 3}
   m_PrefabInstance: {fileID: 1878720911}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1878720919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878720912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d71e721e75843119366f5f29a8adaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SocketAttachpoint: {fileID: 866679219}
 --- !u!1 &1881691625
 GameObject:
   m_ObjectHideFlags: 0
