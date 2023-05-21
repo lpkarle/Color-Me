@@ -46,10 +46,6 @@ public class ColorMixer : MonoBehaviour
         }
     }
 
-    private void Update() {
-        
-    }
-
     public void ShootColor()
     {
         // Only shoot once
@@ -134,6 +130,8 @@ public class ColorMixer : MonoBehaviour
                 if (currentColor.b >= colorStep)
                     currentColor.b -= colorStep;
             }
+
+            ColorMeGameManager.instance.currentColorShoot = currentColor;
         }
 
         newMaterial.color = currentColor;
