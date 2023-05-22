@@ -22,6 +22,8 @@ public class Slime : MonoBehaviour
     public Animator animator;
     private Material faceMaterial;
 
+    public bool startWalking = false;
+
     void Start()
     {
         Debug.Log("Start Slime -----------------------------------");
@@ -39,7 +41,10 @@ public class Slime : MonoBehaviour
     void Update()
     {
         ShowFaceByState();
-        FaceThePlayer();
+
+        if (!startWalking)
+            FaceThePlayer();
+            
         ShowSpeechBubble();
     }
 
@@ -61,7 +66,6 @@ public class Slime : MonoBehaviour
         Vector3 direction = speechBubble.transform.position - playerXrRig.transform.position;
         speechBubble.transform.rotation = Quaternion.LookRotation(direction); 
 
-        // TODO null error
         if (WantedColor != null)
         {
             WantedColor.GetComponent<Renderer>().material.color = ColorMeGameManager.instance.currentWantedColor;

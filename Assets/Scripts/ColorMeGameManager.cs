@@ -22,7 +22,6 @@ public class ColorMeGameManager : MonoBehaviour
     public SlimeFaceState CurrentSlimeFace;
 
     public static event Action<GameState> onGameStateChanged;
-    // maby onBeforeGameStateChanged and onAfterGameStateChanged
     
     void Awake() 
     {
@@ -77,7 +76,7 @@ public class ColorMeGameManager : MonoBehaviour
     {
         Debug.Log("Handle Welcome Menu");
 
-        Timer = 30.0f;
+        Timer = 7.0f;
         playerName = "-";
         playerScore = 0;
 

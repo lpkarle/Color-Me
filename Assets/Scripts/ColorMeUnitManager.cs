@@ -97,15 +97,14 @@ public class ColorMeUnitManager : MonoBehaviour
 
     public async void DestroySlime()
     {
-        await Delay(500);
+        await Delay(500); // show face
 
-        PlaySmokeVFX();
+        var slimeInstanceScript = slimeInstance.GetComponent<Slime>();
+        slimeInstanceScript.startWalking = true;
 
-        await Delay(200);
+        await Delay(2500);
 
         slimeInstance.SetActive(false);
-
-        await Delay(1000);
 
         if (ColorMeGameManager.instance.state != GameState.MENU_RESULT)
             ColorMeGameManager.instance.UpdateGameState(GameState.GAME_SLIME_COMING);
