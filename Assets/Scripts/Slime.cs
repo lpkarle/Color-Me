@@ -62,14 +62,19 @@ public class Slime : MonoBehaviour
         speechBubble.transform.rotation = Quaternion.LookRotation(direction); 
 
         // TODO null error
-        WantedColor.GetComponent<Renderer>().material.color = ColorMeGameManager.instance.currentWantedColor;
-        WantedColor.transform.position = speechBubble.transform.position + new Vector3(0.00f, 0.055f, 0.05f);
-        WantedColor.transform.rotation = speechBubble.transform.rotation;
-
+        if (WantedColor != null)
+        {
+            WantedColor.GetComponent<Renderer>().material.color = ColorMeGameManager.instance.currentWantedColor;
+            WantedColor.transform.position = speechBubble.transform.position + new Vector3(0.00f, 0.055f, 0.05f);
+            WantedColor.transform.rotation = speechBubble.transform.rotation;
+        }
+        
         if(ColorMeGameManager.instance.state == GameState.MENU_RESULT)
         {
             speechBubble.SetActive(false);
-            Destroy(WantedColor);
+
+            if (WantedColor != null)
+                Destroy(WantedColor);
         }
     }
 
