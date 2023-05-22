@@ -76,7 +76,7 @@ public class ColorMeGameManager : MonoBehaviour
     {
         Debug.Log("Handle Welcome Menu");
 
-        Timer = 7.0f;
+        Timer = 300.0f;
         playerName = "-";
         playerScore = 0;
 
