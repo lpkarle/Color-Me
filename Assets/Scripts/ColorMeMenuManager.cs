@@ -18,6 +18,10 @@ public class ColorMeMenuManager : MonoBehaviour
     private TextMeshProUGUI TimerScoreText, ResultScoreText;
 
     [SerializeField]
+    private GameObject NonNativeKeyboard;
+    private Vector3 keyboardOffset = new Vector3(0.0f, 0.2f, 0.0f);
+
+    [SerializeField]
     private Transform _locationPanel;
 
     void Awake()
@@ -43,6 +47,8 @@ public class ColorMeMenuManager : MonoBehaviour
         _panelResult.transform.rotation = _locationPanel.rotation;
         _panelHighscore.transform.position = _locationPanel.position;
         _panelHighscore.transform.rotation = _locationPanel.rotation;
+        NonNativeKeyboard.transform.position = _locationPanel.position + keyboardOffset;
+        NonNativeKeyboard.transform.rotation = _locationPanel.rotation;
     }
 
     public void UpdateScore()

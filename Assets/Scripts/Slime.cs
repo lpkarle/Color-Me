@@ -61,6 +61,7 @@ public class Slime : MonoBehaviour
         Vector3 direction = speechBubble.transform.position - playerXrRig.transform.position;
         speechBubble.transform.rotation = Quaternion.LookRotation(direction); 
 
+        // TODO null error
         WantedColor.GetComponent<Renderer>().material.color = ColorMeGameManager.instance.currentWantedColor;
         WantedColor.transform.position = speechBubble.transform.position + new Vector3(0.00f, 0.055f, 0.05f);
         WantedColor.transform.rotation = speechBubble.transform.rotation;
