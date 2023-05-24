@@ -1,12 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Slime : MonoBehaviour
 {
     [SerializeField]
-    private GameObject WantedColorPrefab, speechBubble;
+    private GameObject wantedColorPrefab, speechBubble;
 
     [SerializeField]
     private AudioSource AudioSourceVFX;
@@ -14,9 +12,10 @@ public class Slime : MonoBehaviour
     [SerializeField]
     private List<AudioClip> AudioClips;
 
-    private GameObject slimeBody, playerXrRig, WantedColor;
+    private GameObject slimeBody, playerXrRig, wantedColor;
 
-    private Vector3 speechBubbleOffset = new Vector3(-0.8f, 1.7f, -0.6f);
+    private Vector3 speechBubbleOffset = new(-0.8f, 1.7f, -0.6f);
+    private Vector3 wantedColorOffset = new(0.00f, 0.055f, 0.05f);
 
     public Face faces;
     public Animator animator;
@@ -32,7 +31,7 @@ public class Slime : MonoBehaviour
         playerXrRig = GameObject.FindWithTag("Player");
         
         speechBubble.SetActive(true);
-        WantedColor = Instantiate(WantedColorPrefab);
+        wantedColor = Instantiate(wantedColorPrefab);
 
         faceMaterial = slimeBody.GetComponent<Renderer>().materials[1];
         SetFace(faces.Idleface);
@@ -48,68 +47,66 @@ public class Slime : MonoBehaviour
         ShowSpeechBubble();
     }
 
-    void SetFace(Texture tex)
-    {
-        faceMaterial.SetTexture("_MainTex", tex);
-    }
+    void SetFace(Texture tex) => faceMaterial.SetTexture("_MainTex", tex);
 
     private void FaceThePlayer()
     {
-        Vector3 direction = playerXrRig.transform.position - this.transform.position;
-        this.transform.rotation = Quaternion.LookRotation(direction);
+        Vector3 direction = playerXrRig.transform.position - transform.position;
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     private void ShowSpeechBubble()
     {
-        speechBubble.transform.position = this.transform.position + speechBubbleOffset;
+        speechBubble.transform.position = transform.position + speechBubbleOffset;
 
         Vector3 direction = speechBubble.transform.position - playerXrRig.transform.position;
         speechBubble.transform.rotation = Quaternion.LookRotation(direction); 
 
-        if (WantedColor != null)
+        if (wantedColor != null)
         {
-            WantedColor.GetComponent<Renderer>().material.color = ColorMeGameManager.instance.currentWantedColor;
-            WantedColor.transform.position = speechBubble.transform.position + new Vector3(0.00f, 0.055f, 0.05f);
-            WantedColor.transform.rotation = speechBubble.transform.rotation;
+            wantedColor.GetComponent<Renderer>().material.color = ColorMeGameManager.Instance.currentWantedColor;
+            wantedColor.transform.SetPositionAndRotation(
+                speechBubble.transform.position + wantedColorOffset,
+                speechBubble.transform.rotation);
         }
         
-        if(ColorMeGameManager.instance.state == GameState.MENU_RESULT)
+        if(ColorMeGameManager.Instance.state == GameState.MENU_RESULT)
         {
             speechBubble.SetActive(false);
 
-            if (WantedColor != null)
-                Destroy(WantedColor);
+            if (wantedColor != null)
+                Destroy(wantedColor);
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (ColorMeGameManager.instance.state != GameState.GAME_MIX_COLOR)
+        if (ColorMeGameManager.Instance.state != GameState.GAME_MIX_COLOR)
             return;
 
-        if (Mathf.Approximately(ColorMeGameManager.instance.Timer, 0.0f))
+        if (Mathf.Approximately(ColorMeGameManager.Instance.Timer, 0.0f))
             return;
 
         if (collision.gameObject.CompareTag("Projectile"))
         {
             AudioSourceVFX.PlayOneShot(AudioClips[0]);
 
-            var newSlimeColor = ColorMeGameManager.instance.currentColorShoot;
+            var newSlimeColor = ColorMeGameManager.Instance.currentColorShoot;
 
             slimeBody.GetComponent<Renderer>().material.color = newSlimeColor;
 
             Destroy(GameObject.FindWithTag("Projectile"));
             
-            ColorMeGameManager.instance.UpdateGameState(GameState.GAME_COLOR_SLIME);
+            ColorMeGameManager.Instance.UpdateGameState(GameState.GAME_COLOR_SLIME);
 
-            Destroy(WantedColor);
+            Destroy(wantedColor);
             speechBubble.SetActive(false);
         }
     }
 
     private void ShowFaceByState()
     {
-        switch (ColorMeGameManager.instance.CurrentSlimeFace)
+        switch (ColorMeGameManager.Instance.CurrentSlimeFace)
         {
             case SlimeFaceState.IDLE:
                 SetFace(faces.Idleface);

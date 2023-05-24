@@ -8813,6 +8813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SocketAttachpoint: {fileID: 845166234}
+  resetPositionAfterMs: 3000
 --- !u!1 &432380627 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1840253059959183956, guid: 5b5177d7183d34d4bbc39118a61e441c, type: 3}
@@ -16971,10 +16972,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1f6ba43d3b94633b5e79ce1a5a3629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panelWelcome: {fileID: 274175035}
-  _panelTimerScore: {fileID: 286221832}
-  _panelResult: {fileID: 713000463}
-  _panelHighscore: {fileID: 1142242670}
+  panelWelcome: {fileID: 274175035}
+  panelTimerScore: {fileID: 286221832}
+  panelResult: {fileID: 713000463}
+  panelHighscore: {fileID: 1142242670}
   TimerScoreText: {fileID: 1764117641}
   ResultScoreText: {fileID: 1959910231}
   NonNativeKeyboard: {fileID: 78514757}
@@ -19691,7 +19692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b31286f94b645bf86e3c817c8651c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WantedColorPrefab: {fileID: 8991099872565531609, guid: 3c775fbd90dd6494db482c8d96a47fff, type: 3}
+  wantedColorPrefab: {fileID: 8991099872565531609, guid: 3c775fbd90dd6494db482c8d96a47fff, type: 3}
   speechBubble: {fileID: 422601566}
   AudioSourceVFX: {fileID: 666270613}
   AudioClips:
@@ -29865,6 +29866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SocketAttachpoint: {fileID: 866679219}
+  resetPositionAfterMs: 3000
 --- !u!1 &1881691625
 GameObject:
   m_ObjectHideFlags: 0

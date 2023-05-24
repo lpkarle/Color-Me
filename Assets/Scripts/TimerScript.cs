@@ -1,41 +1,41 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class TimerScript : MonoBehaviour
 {
     public bool TimerOn = false;
-    private float TimeLeft;
+
+    private float timeLeft;
 
     public TextMeshProUGUI TimerTxt;
 
     void Start()
     {
         TimerOn = true;
-        TimeLeft = ColorMeGameManager.instance.Timer;
+        timeLeft = ColorMeGameManager.Instance.Timer;
     }
 
     void Update()
     {
         if (TimerOn)
         {
-            if (TimeLeft > 0)
+            if (timeLeft > 0)
             {
-                TimeLeft -= Time.deltaTime;
-                updateTimer(TimeLeft);
+                timeLeft -= Time.deltaTime;
+                UpdateTimer(timeLeft);
             }
             else
             {
                 Debug.Log("Time is UP!");
-                TimeLeft = 0;
+                timeLeft = 0;
                 TimerOn = false;
-                ColorMeGameManager.instance.Timer = TimeLeft;
-                ColorMeGameManager.instance.UpdateGameState(GameState.MENU_RESULT);
+                ColorMeGameManager.Instance.Timer = timeLeft;
+                ColorMeGameManager.Instance.UpdateGameState(GameState.MENU_RESULT);
             }
         }
     }
 
-    void updateTimer(float currentTime)
+    private void UpdateTimer(float currentTime)
     {
         currentTime += 1;
 
@@ -44,5 +44,4 @@ public class TimerScript : MonoBehaviour
 
         TimerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-
 }

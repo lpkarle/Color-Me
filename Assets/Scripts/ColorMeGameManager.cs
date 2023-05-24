@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class ColorMeGameManager : MonoBehaviour
 {
-    public static ColorMeGameManager instance;
+    public static ColorMeGameManager Instance;
 
     public GameState state;
 
@@ -21,12 +19,9 @@ public class ColorMeGameManager : MonoBehaviour
     public int playerScore;
     public SlimeFaceState CurrentSlimeFace;
 
-    public static event Action<GameState> onGameStateChanged;
-    
-    void Awake() 
-    {
-        instance = this;
-    }
+    public static event Action<GameState> OnGameStateChanged;
+
+    void Awake() => Instance = this;
 
     void Start()
     {
@@ -67,7 +62,7 @@ public class ColorMeGameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
 
-        onGameStateChanged?.Invoke(newState);
+        OnGameStateChanged?.Invoke(newState);
 
         Debug.Log($"New state: {newState}.");
     }
@@ -76,7 +71,7 @@ public class ColorMeGameManager : MonoBehaviour
     {
         Debug.Log("Handle Welcome Menu");
 
-        Timer = 300.0f;
+        Timer = 10f;
         playerName = "-";
         playerScore = 0;
 

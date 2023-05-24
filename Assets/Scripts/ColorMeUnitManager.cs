@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class ColorMeUnitManager : MonoBehaviour
 {
@@ -36,34 +35,34 @@ public class ColorMeUnitManager : MonoBehaviour
     public async void StartGameEasy()
     {
         Debug.Log("Start Easy Pressed");
-        ColorMeGameManager.instance.difficulty = Difficulty.EASY;
-        ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.EASY;
+        ColorMeGameManager.Instance.difficulty = Difficulty.EASY;
+        ColorMeGameManager.Instance.difficultyColorSteps = DifficultyColorSteps.EASY;
 
         await Delay(500);
         
-        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
+        ColorMeGameManager.Instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
     public async void StartGameNormal()
     {
         Debug.Log("Start Normal Pressed");
-        ColorMeGameManager.instance.difficulty = Difficulty.NORMAL;
-        ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.NORMAL;
+        ColorMeGameManager.Instance.difficulty = Difficulty.NORMAL;
+        ColorMeGameManager.Instance.difficultyColorSteps = DifficultyColorSteps.NORMAL;
 
         await Delay(500);
 
-        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
+        ColorMeGameManager.Instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
     public async void StartGameHard()
     {
         Debug.Log("Start Hard Pressed");
-        ColorMeGameManager.instance.difficulty = Difficulty.HARD;
-        ColorMeGameManager.instance.difficultyColorSteps = DifficultyColorSteps.HARD;
+        ColorMeGameManager.Instance.difficulty = Difficulty.HARD;
+        ColorMeGameManager.Instance.difficultyColorSteps = DifficultyColorSteps.HARD;
         
         await Delay(500);
 
-        ColorMeGameManager.instance.UpdateGameState(GameState.GAME_PLAY);
+        ColorMeGameManager.Instance.UpdateGameState(GameState.GAME_PLAY);
     }
 
     public void lockColorPaletteAndPicker()
@@ -85,13 +84,13 @@ public class ColorMeUnitManager : MonoBehaviour
 
         await Delay(500);
 
-        if (ColorMeGameManager.instance.state != GameState.MENU_RESULT)
+        if (ColorMeGameManager.Instance.state != GameState.MENU_RESULT)
         {
             slimeInstance = Instantiate(this.slimeGameObjects[0]);
             slimeInstance.transform.position = this.spawnPosition;
             slimeInstance.SetActive(true);
 
-            ColorMeGameManager.instance.UpdateGameState(GameState.GAME_MIX_COLOR);
+            ColorMeGameManager.Instance.UpdateGameState(GameState.GAME_MIX_COLOR);
         }
     }
 
@@ -106,20 +105,20 @@ public class ColorMeUnitManager : MonoBehaviour
 
         slimeInstance.SetActive(false);
 
-        if (ColorMeGameManager.instance.state != GameState.MENU_RESULT)
-            ColorMeGameManager.instance.UpdateGameState(GameState.GAME_SLIME_COMING);
+        if (ColorMeGameManager.Instance.state != GameState.MENU_RESULT)
+            ColorMeGameManager.Instance.UpdateGameState(GameState.GAME_SLIME_COMING);
     }
 
     public void GenerateWantedSlimeColor()
     {
-        float colorSteps = ColorMeGameManager.instance.difficultyColorSteps;
+        float colorSteps = ColorMeGameManager.Instance.difficultyColorSteps;
         var red = GetRandomFloat(colorSteps);
         var green = GetRandomFloat(colorSteps);
         var blue = GetRandomFloat(colorSteps);
 
         Debug.Log("Wanted Color: " + red + " " + green + " " + blue);
 
-        ColorMeGameManager.instance.currentWantedColor = new Color(red, green, blue);
+        ColorMeGameManager.Instance.currentWantedColor = new Color(red, green, blue);
     }
 
     private float GetRandomFloat(float stepSize)
@@ -137,17 +136,17 @@ public class ColorMeUnitManager : MonoBehaviour
 
     public void ShowHighscore()
     {
-        ColorMeGameManager.instance.UpdateGameState(GameState.MENU_HIGHSCORE);
+        ColorMeGameManager.Instance.UpdateGameState(GameState.MENU_HIGHSCORE);
     }
 
     public void SaveScore()
     {
         var inputPlayerName = GameObject.FindWithTag("Input_Player_Name").GetComponent<TMP_InputField>().text;
-        ColorMeGameManager.instance.playerName = inputPlayerName;
+        ColorMeGameManager.Instance.playerName = inputPlayerName;
         Debug.Log(
             "-------------------- SaveScore"
         );
-        ColorMeGameManager.instance.UpdateGameState(GameState.MENU_HIGHSCORE);
+        ColorMeGameManager.Instance.UpdateGameState(GameState.MENU_HIGHSCORE);
     }
 
     public void ShowKeyboard()
@@ -157,7 +156,7 @@ public class ColorMeUnitManager : MonoBehaviour
 
     public void PlaySlimeColoredSound()
     {
-        switch (ColorMeGameManager.instance.CurrentSlimeFace)
+        switch (ColorMeGameManager.Instance.CurrentSlimeFace)
         {
             case SlimeFaceState.HAPPY:
                 AudioSourceVFX.PlayOneShot(AudioClips[2]);

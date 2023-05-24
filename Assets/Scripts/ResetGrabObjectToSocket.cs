@@ -1,23 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-
 
 public class ResetGrabObjectToSocket : MonoBehaviour
 {
     [SerializeField]
     Transform SocketAttachpoint;
 
-    public async void resetToAttachpoint()
+    [SerializeField]
+    private int resetPositionAfterMs = 3000;
+
+    public async void ResetToAttachpoint()
     {
-        await Delay(3000);
+        await Delay(resetPositionAfterMs);
 
         if (this != null)
-        {
-            this.transform.position = SocketAttachpoint.position;
-            this.transform.rotation = SocketAttachpoint.rotation;
-        }
+            transform.SetPositionAndRotation(SocketAttachpoint.position, SocketAttachpoint.rotation);
     }
 
     private async Task Delay(int milliseconds)

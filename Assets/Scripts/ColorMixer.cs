@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 
 public class ColorMixer : MonoBehaviour
 {
@@ -18,11 +16,8 @@ public class ColorMixer : MonoBehaviour
     private List<AudioClip> AudioClips;
 
     private GameObject projectilePrefab;
-    private Transform projectileStartPoint;
     private float projectileLaunchSpeed = 70.0f;
     private float projectileTTL = 2.5f;
-
-    private Renderer[] colorObjectsRenderer;
 
     private float colorStep;
 
@@ -49,12 +44,12 @@ public class ColorMixer : MonoBehaviour
     public void ShootColor()
     {
         // Only shoot once
-        if (ColorMeGameManager.instance.state != GameState.GAME_MIX_COLOR)
+        if (ColorMeGameManager.Instance.state != GameState.GAME_MIX_COLOR)
             return;
 
         RaycastHit hit;
         
-        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity))
         {
             if (hit.collider.CompareTag("Slime"))
             {
@@ -62,12 +57,12 @@ public class ColorMixer : MonoBehaviour
 
                 projectilePrefab = objectsToColor[2];
                 
-                GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 0.18f, this.transform.rotation);
+                GameObject projectile = Instantiate(projectilePrefab, transform.position + transform.forward * 0.18f, transform.rotation);
                 Physics.IgnoreCollision(projectile.GetComponent<Collider>(), this.GetComponent<Collider>());
                 
                 if (projectile.TryGetComponent(out Rigidbody rigidBody))
                 {
-                    Vector3 force = this.transform.forward * projectileLaunchSpeed;
+                    Vector3 force = transform.forward * projectileLaunchSpeed;
                     rigidBody.AddForce(force);
 
                     AudioSource.volume = 0.4f; 
@@ -76,20 +71,20 @@ public class ColorMixer : MonoBehaviour
 
                 Destroy(projectile, projectileTTL);
 
-                ColorMeGameManager.instance.currentColorShoot = currentColor;
+                ColorMeGameManager.Instance.currentColorShoot = currentColor;
             }
         }
     }
 
     public void PickColor()
     {
-        colorStep = ColorMeGameManager.instance.difficultyColorSteps;
+        colorStep = ColorMeGameManager.Instance.difficultyColorSteps;
 
         RaycastHit hit;
 
         var distanceToColor = 0.1f;
 
-        if (Physics.Raycast(this.transform.position, this.transform.forward, out hit, distanceToColor))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, distanceToColor))
         {
             AudioSource.volume = 0.8f; 
 
@@ -131,7 +126,7 @@ public class ColorMixer : MonoBehaviour
                     currentColor.b -= colorStep;
             }
 
-            ColorMeGameManager.instance.currentColorShoot = currentColor;
+            ColorMeGameManager.Instance.currentColorShoot = currentColor;
         }
 
         newMaterial.color = currentColor;
