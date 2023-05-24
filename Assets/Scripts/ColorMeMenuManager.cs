@@ -6,21 +6,22 @@ public class ColorMeMenuManager : MonoBehaviour
     public static ColorMeMenuManager Instance;
 
     [SerializeField]
-    private GameObject  panelWelcome, 
-                        panelTimerScore, 
-                        panelResult,
-                        panelHighscore;
+    private GameObject panelWelcome, 
+                       panelTimerScore, 
+                       panelResult,
+                       panelHighscore;
 
     [SerializeField]
-    private TextMeshProUGUI TimerScoreText, ResultScoreText;
+    private TextMeshProUGUI timerScoreText, resultScoreText;
 
     [SerializeField]
-    private GameObject NonNativeKeyboard;
+    private GameObject nonNativeKeyboard;
 
     [SerializeField]
-    private Transform _locationPanel;
+    private Transform locationPanel;
 
-    private Vector3 keyboardOffset = new(0.0f, 0.2f, 0.0f);
+    private Vector3 keyboardOffset = new(0.0f, 0.32f, 0.0f);
+    private Vector3 keyboardRotation = new(-20f, 0f, 0f);
 
     void Awake()
     {
@@ -36,17 +37,18 @@ public class ColorMeMenuManager : MonoBehaviour
 
     void Start()
     {  
-        panelWelcome.transform.SetPositionAndRotation(_locationPanel.position, _locationPanel.rotation);
-        panelTimerScore.transform.SetPositionAndRotation(_locationPanel.position, _locationPanel.rotation);
-        panelResult.transform.SetPositionAndRotation(_locationPanel.position, _locationPanel.rotation);
-        panelHighscore.transform.SetPositionAndRotation(_locationPanel.position, _locationPanel.rotation);
-        NonNativeKeyboard.transform.SetPositionAndRotation(_locationPanel.position + keyboardOffset, _locationPanel.rotation);
+        panelWelcome.transform.SetPositionAndRotation(locationPanel.position, locationPanel.rotation);
+        panelTimerScore.transform.SetPositionAndRotation(locationPanel.position, locationPanel.rotation);
+        panelResult.transform.SetPositionAndRotation(locationPanel.position, locationPanel.rotation);
+        panelHighscore.transform.SetPositionAndRotation(locationPanel.position, locationPanel.rotation);
+        nonNativeKeyboard.transform.SetPositionAndRotation(locationPanel.position + keyboardOffset, locationPanel.rotation);
+        nonNativeKeyboard.transform.Rotate(keyboardRotation);
     }
 
     public void UpdateScore()
     {
-        TimerScoreText.text = $"{ColorMeGameManager.Instance.playerScore}";
-        ResultScoreText.text = $"{ColorMeGameManager.Instance.playerScore}";
+        timerScoreText.text = $"{ColorMeGameManager.Instance.playerScore}";
+        resultScoreText.text = $"{ColorMeGameManager.Instance.playerScore}";
     }
 
     private void GameManagerOnGameStateChanged(GameState state)

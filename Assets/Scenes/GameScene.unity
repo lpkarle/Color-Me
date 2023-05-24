@@ -16976,10 +16976,10 @@ MonoBehaviour:
   panelTimerScore: {fileID: 286221832}
   panelResult: {fileID: 713000463}
   panelHighscore: {fileID: 1142242670}
-  TimerScoreText: {fileID: 1764117641}
-  ResultScoreText: {fileID: 1959910231}
-  NonNativeKeyboard: {fileID: 78514757}
-  _locationPanel: {fileID: 1585117543}
+  timerScoreText: {fileID: 1764117641}
+  resultScoreText: {fileID: 1959910231}
+  nonNativeKeyboard: {fileID: 78514757}
+  locationPanel: {fileID: 1585117543}
 --- !u!1 &974529921
 GameObject:
   m_ObjectHideFlags: 0
