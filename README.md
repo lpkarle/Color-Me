@@ -22,3 +22,4 @@ Enclosed are the external resources used in this project:
 ##### Others
 - Oculus Hands: AR/VR lecture
 - [Microsoft Keyboard](https://github.com/Ayfel/MRTK-Keyboard/tree/main)
+- Poster: https://www.sabelstein.com/magazin/assets/Uploads/additive-farbmischung.jpg
